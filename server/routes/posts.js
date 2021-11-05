@@ -1,5 +1,5 @@
 import express from 'express'
-import { getPosts, createPost } from '../controllers/posts.js'
+import { getPosts, createPost, incrementLikes } from '../controllers/posts.js'
 const router = express.Router()
 
 
@@ -7,5 +7,6 @@ const router = express.Router()
 // localhost:5000/posts s
 router.get('/', getPosts)
 router.post('/', createPost)
+router.post('/addlikes/:id', incrementLikes)
 
 export default router 
