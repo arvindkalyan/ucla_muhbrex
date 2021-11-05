@@ -1,9 +1,9 @@
 import React from 'react'
-
+import PostList from './components/PostList.js'
 const App = () => {
     return (
         <div>
-            <h1> Arvind is a piece of shit </h1> 
+            <PostList/> 
         </div>
     )
 }
