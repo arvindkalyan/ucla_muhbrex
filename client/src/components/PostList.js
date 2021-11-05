@@ -1,32 +1,34 @@
 import React, { Component } from "react"
+import { connect } from 'react-redux'
+
 //import PostForm from "./PostForm.js"
 import "./postList.css"
 import Post from './Post.js'
-export default class PostList extends React.Component{
+
+ class PostList extends Component{
     render() {
-        return (
-            <div className={"container"}>
-                <div className={"postList"}>
-                    <Post/>
-                    <Post />
-                    <Post/>
-                    <Post />
-                    <Post/>
-                    <Post/> <Post/>
-                    <Post />
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post />
-                    <Post/>
-                    <Post />
-                    <Post/>
-                    <Post />
-                    <Post/>
-                    <Post/>
+        return this.props.posts.map((post) => {
+            return (
+                <div className="item" key={post.title}>
+                    <div>
+                        <button>
+                            Select
+                        </button>
+                    </div>
+                    <div className="content">
+                        {post.title}
+                    </div>
                 </div>
-            </div>
+            )
+        }
+            
            
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return { posts: state.posts }
+}
+
+export default connect(mapStateToProps)(PostList)
