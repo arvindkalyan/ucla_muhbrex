@@ -50,11 +50,21 @@ export const createPost = async (req, res) => {
 
 export const incrementLikes = async (req, res) => {
     try {
-        const post = await PostModel.findById(req.params.id)
+
+        //we can't directly modify a field based 
+        //on its previous value, so we need this intermediary 
+        //step to find the previous value of the likes field 
+        const postID = req.params.id
+        const post = await PostModel.findById(postID)
         res.status(200).json(post)
         const newLikes = post.likes + 1
         
-        
+        try {
+            await PostModel.findByIdAndUpdate(postID, { likes: newLikes })
+            console.log(`Likes on post ${postID} incremented by 1!`)
+        } catch (error){
+            res.status(409).json({message : error.message})
+        }
     }
     catch (error) {
         res.status(404).json({message : error.message})
