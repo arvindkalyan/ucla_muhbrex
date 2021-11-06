@@ -14,19 +14,7 @@ export const getPosts = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-    /* the model for reference 
-    title: String,
-    message: String,
-    creator: String,
-    timeStamp: {
-        type: Date,
-        default: new Date()
-    },
-    likes: {
-        type: Number,
-        default: 0
-    }
-    */
+    
     //const timeStamp = Date.parse(req.body.timeStamp)
     const title = req.body.title
     const message = req.body.message
@@ -56,11 +44,12 @@ export const incrementLikes = async (req, res) => {
         //step to find the previous value of the likes field 
         const postID = req.params.id
         const post = await PostModel.findById(postID)
-        res.status(200).json(post)
+        res.status(201).json(post)
         const newLikes = post.likes + 1
         
         try {
-            await PostModel.findByIdAndUpdate(postID, { likes: newLikes })
+            const post = await PostModel.findByIdAndUpdate(postID, { likes: newLikes })
+            res.status(201).json(post)
             console.log(`Likes on post ${postID} incremented by 1!`)
         } catch (error){
             res.status(409).json({message : error.message})
@@ -69,5 +58,31 @@ export const incrementLikes = async (req, res) => {
     catch (error) {
         res.status(404).json({message : error.message})
     }
- 
 }
+
+export const updatePost = async (req, res) => {
+    try {
+        const post = await PostModel.findByIdAndUpdate(req.params.id,
+            {
+                message: req.body.message,
+                title: req.body.title
+            }
+        )
+        res.status(201).json(post)
+    }
+    catch (error){
+        res.status(409).json({message : error.message})
+    }
+}
+
+
+
+export const deletePost = async (req, res) => {
+    try {
+        await PostModel.findByIdAndDelete(req.params.id)
+        res.status(200).json(`Post ${req.params.id} deleted`)
+    } catch (error) {
+        res.status(409).json({message : error.message})
+    }
+}
+
