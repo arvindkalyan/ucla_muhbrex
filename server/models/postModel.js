@@ -4,6 +4,7 @@ const postSchema = mongoose.Schema({
     title: String,
     message: String,
     creator: String,
+    timeStamp : String,
     /*timeStamp: {
         type: Date,
         default: new Date()

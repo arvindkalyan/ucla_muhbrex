@@ -20,13 +20,14 @@ export const createPost = async (req, res) => {
     const title = req.body.title
     const message = req.body.message
     const creator = req.body.creator
-   
+    const rawTime = Date().toLocaleString().split(' ')
+    const timeStamp = [rawTime[0], rawTime[1], rawTime[2], rawTime[3], rawTime[4] ].join(' ')
     
     const newPost = new PostModel({
         title,
         message,
         creator,
-       // timeStamp,
+        timeStamp,
     })
     try {
         await newPost.save()

@@ -33,8 +33,16 @@ class PostList extends Component{
     
     renderPosts() {
         return this.state.posts.map((post) => {
-            return <Post title={post.title} creator={post.creator} message={post.message}
-                likes={post.likes} key={post._id} id={post._id} deletePost={this.deletePost} addLike={this.addLike}/>
+            return <Post title={post.title}
+                creator={post.creator}
+                message={post.message}
+                likes={post.likes}
+                timeStamp={post.timeStamp}
+                key={post._id}
+                id={post._id}
+                deletePost={this.deletePost}
+                addLike={this.addLike} />
+                
         })
     }
 
