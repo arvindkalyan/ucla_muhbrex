@@ -50,6 +50,9 @@ export const incrementLikes = async (req, res) => {
         try {
             const post = await PostModel.findByIdAndUpdate(postID, { likes: newLikes })
             res.status(201).json(post)
+            //NOTE FOR OTHER DEVELOPERS: 
+                //findByIdAndUpdate returns the database entry as it was 
+                //BEFORE! the update 
             console.log(`Likes on post ${postID} incremented by 1!`)
         } catch (error){
             res.status(409).json({message : error.message})
@@ -68,6 +71,9 @@ export const updatePost = async (req, res) => {
                 title: req.body.title
             }
         )
+        //NOTE FOR OTHER DEVELOPERS: 
+            //findByIdAndUpdate returns the database entry as it was 
+            //BEFORE! the update
         res.status(201).json(post)
     }
     catch (error){
