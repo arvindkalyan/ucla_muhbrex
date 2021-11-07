@@ -13,6 +13,7 @@ class PostList extends Component{
         }
 
         this.deletePost = this.deletePost.bind(this)
+        this.addLike = this.addLike.bind(this)
         console.log(this.state.posts)
     }
 
@@ -33,13 +34,13 @@ class PostList extends Component{
     renderPosts() {
         return this.state.posts.map((post) => {
             return <Post title={post.title} creator={post.creator} message={post.message}
-                likes={post.likes} key={post._id} id={post._id} deletePost={this.deletePost}/>
+                likes={post.likes} key={post._id} id={post._id} deletePost={this.deletePost} addLike={this.addLike}/>
         })
     }
 
     deletePost(id) {
         console.log("deleting")
-        //const res = await axios.get('https://httpbin.org/get', { params: { answer: 42 } });
+        
         //for some reason this shit did not work 
         //const url = 'http://localhost:5000/posts/delete/' + id
         //console.log(url)
@@ -53,6 +54,22 @@ class PostList extends Component{
         this.setState({
             posts : this.state.posts.filter((post) => post._id !== id)
         })
+    }
+
+    addLike(id) {
+        console.log(`Liking post ${id}`)
+
+        axios.post('http://localhost:5000/posts/addlikes/' + id)
+            .then(() => {
+                console.log(`like successful`)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+        
+        //TODO: this isn't ideal, but I can't think of how 
+        //else to get the like count to go up without 
+        //user having to physically refresh 
+        window.location = '/'
     }
     
     render() {
