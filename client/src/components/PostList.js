@@ -12,7 +12,7 @@ class PostList extends Component{
             posts: []
         }
 
-        
+        this.deletePost = this.deletePost.bind(this)
         console.log(this.state.posts)
     }
 
@@ -29,15 +29,29 @@ class PostList extends Component{
             })
     }
 
-    componentDidUpdate() {
-        console.log("useEffect run")
-        console.log(this.state.posts)
-    }
-
+    
     renderPosts() {
         return this.state.posts.map((post) => {
             return <Post title={post.title} creator={post.creator} message={post.message}
-                    likes={post.likes}/>
+                likes={post.likes} key={post._id} id={post._id} deletePost={this.deletePost}/>
+        })
+    }
+
+    deletePost(id) {
+        console.log("deleting")
+        //const res = await axios.get('https://httpbin.org/get', { params: { answer: 42 } });
+        //for some reason this shit did not work 
+        //const url = 'http://localhost:5000/posts/delete/' + id
+        //console.log(url)
+        
+        axios.delete('http://localhost:5000/posts/delete/' + id)
+            .then(() => {
+                console.log(`deleted ${id}`)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+        this.setState({
+            posts : this.state.posts.filter((post) => post._id !== id)
         })
     }
     
