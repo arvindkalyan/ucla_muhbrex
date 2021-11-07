@@ -3,7 +3,8 @@ import PostModel from '../models/postModel.js'
 export const getPosts = async (req, res) => {
 
     try {
-        const postMessages = await PostModel.find()
+        //sort by most recent 
+        const postMessages = await PostModel.find().sort({'_id' : -1})
         
         res.status(200).json(postMessages)
         console.log("posts retrieved!")
