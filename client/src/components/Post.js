@@ -23,7 +23,7 @@ class Post extends React.Component{
                 <p> Title: {this.state.title} </p>
                 <p> Message: {this.state.message} </p>
                 <p> Likes: {this.state.likes} </p>
-                <p> ID: {this.state.id} </p>
+                {/* <p> ID: {this.state.id} </p> */}
                 <p> Timestamp: {this.state.timeStamp} </p> 
                 <button onClick={() => { this.props.deletePost(this.props.id) }}> Delete </button>
                 <button onClick={() => { this.props.addLike(this.props.id)}}> Like </button>
