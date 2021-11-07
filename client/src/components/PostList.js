@@ -64,10 +64,10 @@ class PostList extends Component{
         })
     }
 
-    addLike(id) {
+    addLike(id, likes) {
         console.log(`Liking post ${id}`)
 
-        axios.post('http://localhost:5000/posts/addlikes/' + id)
+        axios.post('http://localhost:5000/posts/addlikes/' + id + '/' + likes)
             .then(() => {
                 console.log(`like successful`)
             }).catch((error) => {

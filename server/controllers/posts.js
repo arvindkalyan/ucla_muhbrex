@@ -37,7 +37,19 @@ export const createPost = async (req, res) => {
         res.status(409).json({message : error.message})
     }
 }
-
+const helperToLikes = async (postID, newLikes, res) => {
+    try {
+        const post = await PostModel.findByIdAndUpdate(postID, { likes: newLikes })
+        res.status(201).json(post)
+        //NOTE FOR OTHER DEVELOPERS: 
+            //findByIdAndUpdate returns the database entry as it was 
+            //BEFORE! the update 
+        console.log(`Likes on post ${postID} incremented by 1!`)
+    } catch (error){
+        res.status(409).json({message : error.message})
+    } 
+    
+}
 export const incrementLikes = async (req, res) => {
     try {
 
@@ -45,20 +57,14 @@ export const incrementLikes = async (req, res) => {
         //on its previous value, so we need this intermediary 
         //step to find the previous value of the likes field 
         const postID = req.params.id
-        const post = await PostModel.findById(postID)
+        const newLikes = Number(req.params.likes) + 1
+        const post = await PostModel.findByIdAndUpdate(postID, {likes : newLikes})
         res.status(201).json(post)
-        const newLikes = post.likes + 1
+        //const newLikes = post.likes + 1
         
-        try {
-            const post = await PostModel.findByIdAndUpdate(postID, { likes: newLikes })
-            res.status(201).json(post)
-            //NOTE FOR OTHER DEVELOPERS: 
-                //findByIdAndUpdate returns the database entry as it was 
-                //BEFORE! the update 
-            console.log(`Likes on post ${postID} incremented by 1!`)
-        } catch (error){
-            res.status(409).json({message : error.message})
-        }
+        
+        //helperToLikes(postID, newLikes)
+        
     }
     catch (error) {
         res.status(404).json({message : error.message})

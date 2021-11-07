@@ -13,7 +13,7 @@ const router = express.Router()
 // localhost:5000/posts 
 router.get('/', getPosts)
 router.post('/create', createPost)
-router.post('/addlikes/:id', incrementLikes)
+router.post('/addlikes/:id/:likes', incrementLikes)
 
 //TODO 
 router.delete('/delete/:id', deletePost)
