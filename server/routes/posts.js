@@ -10,7 +10,9 @@ const router = express.Router()
 
 
 //NOTE: Every route in this file actually starts with 
-// localhost:5000/posts 
+// http://localhost:5000/posts 
+
+
 router.get('/', getPosts)
 router.post('/create', createPost)
 router.post('/addlikes/:id/:likes', incrementLikes)

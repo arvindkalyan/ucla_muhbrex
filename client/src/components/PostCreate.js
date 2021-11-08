@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import axios from 'axios'
-//import { Field, reduxForm } from 'redux-form';
 
 function PostCreate() {
     //TODO: populate this field with user from 
