@@ -4,16 +4,17 @@ const postSchema = mongoose.Schema({
     title: String,
     message: String,
     creator: String,
-    timeStamp: {
+    timeStamp : String,
+    /*timeStamp: {
         type: Date,
         default: new Date()
-    },
+    },*/
     likes: {
         type: Number,
         default: 0
-    }
+    } 
 })
 
-const postMessage = mongoose.model('postMessage', postSchema)
+const PostModel = mongoose.model('PostModel', postSchema)
 
-export default postMessage 
+export default PostModel 
