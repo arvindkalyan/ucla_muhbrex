@@ -7,10 +7,9 @@ import "./SidebarOption.css";
 function SidebarOption({ active, text, link, Icon }) {
   return (
     <div>
-      <Button className="sidebarOption">
-        <Icon />
-        <Link to={link}> <h2>{text}</h2>
-        </Link>
+      <Button component={Link} to={link} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>  
+        <Icon className="sidebarOption"/>
+        <h2> {text} </h2>
       </Button>
     </div>
   );

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, {Component } from 'react'
+import './Post.css'
 
 
 class Post extends React.Component{
@@ -18,7 +19,7 @@ class Post extends React.Component{
     
     render() {
         return (
-            <div>
+            <div className = "post">
                 <p> Creator: {this.state.creator} </p>
                 <p> Title: {this.state.title} </p>
                 <p> Message: {this.state.message} </p>
