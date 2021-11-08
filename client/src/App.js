@@ -3,6 +3,15 @@ import PostList from './components/PostList.js'
 import PostCreate from './components/PostCreate.js'
 import PostEdit from './components/PostEdit.js'
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import GoogleAuth from './components/GoogleAuth.js'
+//import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
+//import AuthNav from './components/authbuttons/AuthNav.js';
+
+//auth0
+//wrap one level inside browser with <Auth0ProviderWithHistory>
+//include <AuthNav /> after last <button>
+
+
 class App extends React.Component{
     render() {
         return (
@@ -13,6 +22,7 @@ class App extends React.Component{
                 <h1> <Link to="/"> UCLA </Link> </h1>
                 <button> <Link to="/"> Posts </Link> </button>
                 <button> <Link to="/create"> Create post </Link> </button> 
+                <GoogleAuth />
                 <Routes>
                     <Route path="/" exact element={<PostList/>} />
                     <Route path="/create" element={<PostCreate />} />

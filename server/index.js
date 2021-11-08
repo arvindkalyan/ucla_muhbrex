@@ -2,8 +2,31 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import postRoutes from './routes/posts.js'
+//const { auth } = require('express-openid-connect');
 
 const app = express();
+
+// //auth
+// const config = {
+//   authRequired: false,
+//   auth0Logout: true,
+//   secret: 'a long, randomly-generated string stored in env',
+//   baseURL: 'http://localhost:3000',
+//   clientID: 'wwkf_tru5s2nz9-o2JH-rN1OVgu8nwKkr0TGqi4u1ly1EqydRmqcRnJNl5miRUWj',
+//   issuerBaseURL: 'https://dev-lpnow650.us.auth0.com'
+// };
+
+// // auth router attaches /login, /logout, and /callback routes to the baseURL
+// app.use(auth(config));
+
+// // req.isAuthenticated is provided from the auth router
+// app.get('/', (req, res) => {
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+//   console.log(res);
+// });
+
+
+
 
 //json data cannot be greater than 20mb
 //extended: true allows parsing of non-strings as well 

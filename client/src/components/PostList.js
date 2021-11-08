@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React from "react"
-//import PostForm from "./PostForm.js"
-=======
 import React, { Component } from "react"
->>>>>>> 79b0495e58b5c058dfdfcd3e05eb02f7798987c7
 import "./postList.css"
 import Post from './Post.js'
 import { Link } from 'react-router-dom'
@@ -89,27 +84,7 @@ class PostList extends Component{
         return (
             <div className={"container"}>
                 <div className={"postList"}>
-<<<<<<< HEAD
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-=======
                 {this.renderPosts()}
->>>>>>> 79b0495e58b5c058dfdfcd3e05eb02f7798987c7
                 </div>
             </div>
         )
