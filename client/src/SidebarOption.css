@@ -1,0 +1,39 @@
+a{
+    text-decoration:none;
+}
+
+.sidebarOption{
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    color: black !important;
+    padding: 10px;
+}
+
+a:visited{ 
+    text-decoration: none !important; 
+    color:inherit; 
+   }
+
+
+.sidebarOption:hover{
+    background-color: #e8f5fe !important;
+    border-radius: 30px !important;
+    color: #50b7f5 !important;
+    transition: color 10ms ease-in-out !important;
+}
+
+.sidebarOption > .MuiSvgIcon-root {
+    padding: 20px;
+}
+
+.sidebarOption > h2 {
+    font-weight: 800;
+    font-size: 20px;
+    margin-right: 20px;
+
+}
+
+.sidebarOption--active {
+    color: #50b7f5;
+}
