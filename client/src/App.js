@@ -16,12 +16,12 @@ class App extends React.Component {
                 before the Routes block into an actual nice navbar */}
           <Sidebar />
 
-          <Feed />
+          {/* <Feed /> */}
 
           
           <Routes>
             {/* <Route path="/" /> */}
-            {/* <Route path="/" exact element={<PostList />} /> */}
+            <Route path="/" exact element={<Feed />} /> 
             <Route path="/create" element={<PostCreate />} />
             <Route path="/edit/:id" element={<PostEdit />} />
 
