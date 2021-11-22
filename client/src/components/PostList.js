@@ -21,7 +21,7 @@ class PostList extends Component{
         this.addLike = this.addLike.bind(this)
         console.log(this.state.posts)
     }
-
+    
     componentDidMount() {
         console.log("setting posts")
         axios.get('http://localhost:5000/posts')
@@ -68,21 +68,36 @@ class PostList extends Component{
             posts : this.state.posts.filter((post) => post._id !== id)
         })
     }
-
+    
     addLike(id, likes) {
         console.log(`Liking post ${id}`)
-
+        //let self = this
         axios.post('http://localhost:5000/posts/addlikes/' + id + '/' + likes)
             .then(() => {
                 console.log(`like successful`)
-            }).catch((error) => {
+                this.setState((prev) => {
+                    console.log(prev)
+                    return {
+                        posts: prev.posts.map((post) => {
+                            if (id === post._id) {
+                                return {
+                                    ...post,
+                                    likes: Number(post.likes) + 1
+                                }
+                            }
+                            else {
+                                return post
+                            }
+                        })
+                   }
+               })
+            })
+            .catch((error) => {
                 console.log(error.message)
             })
         
-        //TODO: this isn't ideal, but I can't think of how 
-        //else to get the like count to go up without 
-        //user having to physically refresh 
-        window.location = '/'
+
+     
     }
     
     render() {
