@@ -4,7 +4,7 @@ import axios from 'axios'
 function PostCreate() {
     //TODO: populate this field with user from 
     //user authentication 
-    const creator = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().hT
+    const creator = window.gapi?.auth2?.getAuthInstance()?.currentUser?.get()?.getId() || "place_holder_user"
     const title = useRef()
     const message = useRef()
     
