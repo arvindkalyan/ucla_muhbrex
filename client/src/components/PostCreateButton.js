@@ -15,7 +15,10 @@ function PostCreateButton(props) {
 }
 
 const mapStateToProps = (state) => {
-    return { isSignedIn: state.auth.isSignedIn }
+    return { 
+        isSignedIn: state.auth.isSignedIn,  
+        userId: state.auth.userId
+    }
 }
 
 export default connect(mapStateToProps, { signIn, signOut })(PostCreateButton);

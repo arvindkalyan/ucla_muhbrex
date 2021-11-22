@@ -3,7 +3,7 @@ import PostList from './components/PostList.js'
 import PostCreate from './components/PostCreate.js'
 import PostEdit from './components/PostEdit.js'
 import PostCreateButton from './components/PostCreateButton.js'
-import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 import GoogleAuth from './components/GoogleAuth.js'
 
@@ -30,7 +30,7 @@ class App extends React.Component{
             <Router>
                 {/* TODO: Make the following set of stuff 
                 before the Routes block into an actual nice navbar */}
-                <h1> <Link to="/"> UCLA </Link> </h1>``
+                <h1> <Link to="/"> UCLA </Link> </h1>
                 <button> <Link to="/"> Posts </Link> </button>
                 <GoogleAuth />
                 <PostCreateButton />

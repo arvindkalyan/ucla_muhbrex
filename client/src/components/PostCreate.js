@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
+import { connect } from 'react-redux';
+import { signIn, signOut } from '../actions';
 import axios from 'axios'
 
-function PostCreate() {
+function PostCreate(props) {
     //TODO: populate this field with user from 
     //user authentication 
-    const creator = window.gapi?.auth2?.getAuthInstance()?.currentUser?.get()?.getId() || "place_holder_user"
+    const creator = props.userId
     const title = useRef()
     const message = useRef()
     
@@ -56,4 +58,11 @@ function PostCreate() {
     
 }
 
-export default PostCreate;
+const mapStateToProps = (state) => {
+    return {
+        isSignedIn: state.auth.isSignedIn,
+        userId: state.auth.userId
+    }
+}
+
+export default connect(mapStateToProps, { signIn, signOut })(PostCreate);
