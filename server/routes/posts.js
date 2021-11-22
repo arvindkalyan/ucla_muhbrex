@@ -1,6 +1,7 @@
 import express from 'express'
 import {
     getPosts,
+    getPost,
     createPost,
     incrementLikes,
     updatePost,
@@ -20,5 +21,6 @@ router.post('/addlikes/:id/:likes', incrementLikes)
 //TODO 
 router.delete('/delete/:id', deletePost)
 router.post('/update/:id', updatePost)
+router.get('/get/:id', getPost)
 
 export default router 

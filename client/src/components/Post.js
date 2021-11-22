@@ -6,8 +6,6 @@ import './Post.css'
 class Post extends React.Component{
     constructor(props) {
         super(props)
-        
-        
     }
     
     render() {
@@ -21,6 +19,10 @@ class Post extends React.Component{
                 <p> Timestamp: {this.props.timeStamp} </p> 
                 <button onClick={() => { this.props.deletePost(this.props.id) }}> Delete </button>
                 <button onClick={() => { this.props.addLike(this.props.id, this.props.likes)}}> Like </button>
+                <button onClick={() => {
+                    window.location = '/edit/' + this.props.id
+                    //console.log(this.props.id)
+                }}> Edit </button>
             </div>
         )
     }

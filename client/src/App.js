@@ -12,22 +12,17 @@ class App extends React.Component {
       <div className="app">
 
         <Router>
-          {/* TODO: Make the following set of stuff 
-                before the Routes block into an actual nice navbar */}
+          
           <Sidebar />
-
-          {/* <Feed /> */}
-
           
           <Routes>
-            {/* <Route path="/" /> */}
             <Route path="/" exact element={<Feed />} /> 
             <Route path="/create" element={<PostCreate />} />
             <Route path="/edit/:id" element={<PostEdit />} />
 
-            {/* TODO: how should we arrange routing for liking a post? */}
+            
           </Routes>
-          {/* TODO: Add routes for editing a post and liking it */}
+          
         </Router>
 
 

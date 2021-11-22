@@ -1,10 +1,13 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 //import { Field, reduxForm } from 'redux-form';
 
-class PostEdit extends React.Component {
-
-
-    render() {
+const PostEdit = () => {
+        const { id } = useParams();
+        //console.log(id)
+        //first need to get the current post 
+    
+    
         return (
             <div>
                 PostEdit
@@ -15,7 +18,7 @@ class PostEdit extends React.Component {
                 </form> */}
             </div>
         )
-    }
+    
 }
 
 export default PostEdit;
