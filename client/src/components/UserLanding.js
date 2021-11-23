@@ -4,21 +4,33 @@ import Post from './Post';
 import axios from 'axios';
 import './postList.css'
 
-function UserLanding(props) {
+class UserLanding extends React.Component {
+    constructor(props) {
+        super(props)
 
-    const [posts, setPosts] = useState([]);
+        this.state = {
+            posts: []
+        }
 
-    useEffect(() => {
-        console.log("setting user posts")
+        this.deletePost = this.deletePost.bind(this)
+        this.addLike = this.addLike.bind(this)
+        console.log(this.state.posts)
+    }
+
+    componentDidMount() {
+        console.log("setting posts")
         axios.get('http://localhost:5000/posts')
             .then((res) => {
-                setPosts(res.data)
+                this.setState({
+                    posts : res.data
+                })
+               
             }).catch((error) => {
                 console.log(error.message)
             })
-    }, []);
+    }
 
-    const deletePost = (id) => {
+    deletePost(id) {
         console.log("deleting")
         
         //for some reason this shit did not work 
@@ -36,10 +48,13 @@ function UserLanding(props) {
         })
     }
     
-    const addLike = (id, likes) => {
+    addLike(id, likes, usersLiked) {
         console.log(`Liking post ${id}`)
         //let self = this
-        axios.post('http://localhost:5000/posts/addlikes/' + id + '/' + likes)
+        const userArray = {
+            usersLiked: usersLiked
+        }
+        axios.post('http://localhost:5000/posts/addlikes/' + id + '/' + likes, userArray)
             .then(() => {
                 console.log(`like successful`)
                 this.setState((prev) => {
@@ -61,13 +76,12 @@ function UserLanding(props) {
             })
             .catch((error) => {
                 console.log(error.message)
-            })
-        }
-     
+            })     
+    } 
 
-    const renderPosts = () => {
-        return posts.map((post) => {
-            if (props.userId === post.creator) {
+    renderPosts() {
+        return this.state.posts.map((post) => {
+            if (this.props.userId === post.creator) {
                 return  (
                     <Post 
                         title={post.title}
@@ -77,21 +91,24 @@ function UserLanding(props) {
                         timeStamp={post.timeStamp}
                         key={post._id}
                         id={post._id}
-                        deletePost={deletePost}
-                        addLike={addLike} 
+                        deletePost={this.deletePost}
+                        addLike={this.addLike} 
+                        usersLiked={post.usersLiked} 
                     />
                 )
             } 
         })
     }
 
-    return (
-        <div className="container">
-            <div className="UserLanding">
-                {renderPosts()}
+    render() {
+        return (
+            <div className="container">
+                <div className="UserLanding">
+                    {this.renderPosts()}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 const mapStateToProps = (state) => {
