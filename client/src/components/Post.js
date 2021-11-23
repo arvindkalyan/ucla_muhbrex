@@ -6,17 +6,9 @@ import './Post.css'
 
 
 class Post extends React.Component{
-<<<<<<< HEAD
-    // constructor(props) {
-    //     super(props)
-        
-        
-    // }
-=======
     constructor(props) {
         super(props)
     }
->>>>>>> sa_editing_post
     
     render() {
         return (
@@ -28,11 +20,11 @@ class Post extends React.Component{
                 {/* <p> ID: {this.props.id} </p> */}
                 <p> Timestamp: {this.props.timeStamp} </p> 
                 {(this.props.userId === this.props.creator) ? <button onClick={() => { this.props.deletePost(this.props.id) }}> Delete </button> : null}
-                <button onClick={() => { this.props.addLike(this.props.id, this.props.likes)}}> Like </button>
-                <button onClick={() => {
+                {(this.props.isSignedIn) ? <button onClick={() => { this.props.addLike(this.props.id, this.props.likes)}}> Like </button> : null}
+                {(this.props.userId === this.props.creator) ? <button onClick={() => {
                     window.location = '/edit/' + this.props.id
                     //console.log(this.props.id)
-                }}> Edit </button>
+                }}> Edit </button> : null}
             </div>
         )
     }

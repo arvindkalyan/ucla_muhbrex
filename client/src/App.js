@@ -11,6 +11,7 @@ import Feed from './components/Feed.js'
 import "./App.css"
 import GoogleAuth from './components/GoogleAuth.js'
 import PostCreateButton from './components/PostCreateButton.js'
+import UserLanding from './components/UserLanding.js'
 
 class App extends React.Component {
   render() {
@@ -28,6 +29,7 @@ class App extends React.Component {
             <Route path="/" exact element={<Feed />} /> 
             <Route path="/create" element={<PostCreate />} />
             <Route path="/edit/:id" element={<PostEdit />} />
+            <Route path="/user/:id" element={<UserLanding />} />
 
             
           </Routes>

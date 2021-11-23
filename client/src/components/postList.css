@@ -9,3 +9,9 @@
   flex-direction: column;
   gap: 10%;
 }
+
+.UserLanding {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+}
