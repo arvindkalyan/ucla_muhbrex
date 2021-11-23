@@ -1,23 +1,84 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useState,
+    useRef
+} from 'react';
+
 import { useParams } from 'react-router-dom';
-//import { Field, reduxForm } from 'redux-form';
+import axios from 'axios'
+
 
 const PostEdit = () => {
-        const { id } = useParams();
-        //console.log(id)
-        //first need to get the current post 
+    const { id } = useParams()
+    const [title, setTitle] = useState()
+    const [message, setMessage] = useState()
+    const newTitle = useRef()
+    const newMessage = useRef()
     
-    
-        return (
-            <div>
-                PostEdit
-                {/* <form>
-                    <Field name="title" component={this.renderInput} label="Enter Title"/>
-                    <Field name="description" component={this.renderInput} label="Enter content"/>
-                    <button className="ui button primary">Submit</button>
-                </form> */}
-            </div>
-        )
+
+    //this is in effect the same as ComponentDidMount 
+    useEffect(() => {
+        axios.get('http://localhost:5000/posts/get/' + id)
+            .then((res) => {
+                setTitle(res.data.title)
+                setMessage(res.data.message)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    }, []);
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        
+        
+        const newPostFields = {
+            title: newTitle.current.value,
+            message: newMessage.current.value
+        }
+       
+       
+        axios.post("http://localhost:5000/posts/update/" + id, newPostFields)
+            .then((res) => console.log(res.data))
+            .catch((error) => console.log(error.message))
+        //take person back to homepage 
+        window.location = '/'
+    }
+
+    return (
+        <div>
+            <h1> PostEdit </h1> 
+            <form onSubmit={handleSubmit}>
+                <label>
+                    New Title: 
+                    <input
+                        ref={newTitle}
+                        name="title"
+                        value={title}
+                        onChange={(event) => {
+                            setTitle(event.target.value)
+                        }}
+                    /> 
+                </label>
+                
+                <label>
+                    New Message: 
+                    <input
+                        ref={newMessage}
+                        name="message"
+                        value={message}
+                        onChange={(event) => {
+                            setMessage(event.target.value)
+                        }}
+                    /> 
+                </label>
+                
+            <button type="submit"> Submit Changes </button> 
+            </form>
+        
+        </div>
+    )
+
+   
     
 }
 
