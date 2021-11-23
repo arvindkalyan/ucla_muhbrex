@@ -10,7 +10,7 @@ import Sidebar from './components/Sidebar.js'
 import Feed from './components/Feed.js'
 import "./App.css"
 import GoogleAuth from './components/GoogleAuth.js'
-import PostCreateButton from './components/PostCreateButton.js'
+//import PostCreateButton from './components/PostCreateButton.js'
 import UserLanding from './components/UserLanding.js'
 
 class App extends React.Component {
