@@ -10,12 +10,7 @@ function Feed() {
                 <h2>FEED</h2>
             </div>
             <PostList />
-            {/* tweetbox */}
-            {/* post */}
-            {/* post */}
-            {/* post */}
-            {/* post */}
-            {/* post */}
+           
         </div>
     )
 }

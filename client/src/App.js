@@ -23,19 +23,15 @@ class App extends React.Component {
           <GoogleAuth />
           {/*<PostCreateButton />*/}
           <Sidebar />
-
-          {/* <Feed /> */}
-
           
           <Routes>
-            {/* <Route path="/" /> */}
             <Route path="/" exact element={<Feed />} /> 
             <Route path="/create" element={<PostCreate />} />
             <Route path="/edit/:id" element={<PostEdit />} />
 
-            {/* TODO: how should we arrange routing for liking a post? */}
+            
           </Routes>
-          {/* TODO: Add routes for editing a post and liking it */}
+          
         </Router>
 
 

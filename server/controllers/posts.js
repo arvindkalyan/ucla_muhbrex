@@ -14,6 +14,18 @@ export const getPosts = async (req, res) => {
     
 }
 
+export const getPost = async (req, res) => {
+    try {
+        const postID = req.params.id
+        const post = await PostModel.findById(postID)
+        res.status(200).json(post)
+        console.log("post " + postID + " retrieved!")
+    }
+    catch (error) {
+        res.status(404).json({message : error.message})
+    }
+}
+
 export const createPost = async (req, res) => {
     
     //const timeStamp = Date.parse(req.body.timeStamp)
@@ -37,19 +49,7 @@ export const createPost = async (req, res) => {
         res.status(409).json({message : error.message})
     }
 }
-const helperToLikes = async (postID, newLikes, res) => {
-    try {
-        const post = await PostModel.findByIdAndUpdate(postID, { likes: newLikes })
-        res.status(201).json(post)
-        //NOTE FOR OTHER DEVELOPERS: 
-            //findByIdAndUpdate returns the database entry as it was 
-            //BEFORE! the update 
-        console.log(`Likes on post ${postID} incremented by 1!`)
-    } catch (error){
-        res.status(409).json({message : error.message})
-    } 
-    
-}
+
 export const incrementLikes = async (req, res) => {
     try {
 
