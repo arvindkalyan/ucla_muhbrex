@@ -1,5 +1,5 @@
 import React from 'react';
-import PostList from './components/PostList.js'
+import PostList from './PostList.js'
 import './Feed.css'
 
 function Feed() {

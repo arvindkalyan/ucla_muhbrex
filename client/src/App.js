@@ -1,10 +1,13 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+//import { signIn, signOut } from './actions/index.js'
 import PostList from './components/PostList.js'
 import PostCreate from './components/PostCreate.js'
 import PostEdit from './components/PostEdit.js'
-import Sidebar from './Sidebar.js'
-import Feed from './Feed.js'
+import Sidebar from './components/Sidebar.js'
+import Feed from './components/Feed.js'
 import "./App.css"
 import GoogleAuth from './components/GoogleAuth.js'
 import PostCreateButton from './components/PostCreateButton.js'
@@ -18,7 +21,7 @@ class App extends React.Component {
           {/* TODO: Make the following set of stuff 
                 before the Routes block into an actual nice navbar */}
           <GoogleAuth />
-          <PostCreateButton />
+          {/*<PostCreateButton />*/}
           <Sidebar />
 
           {/* <Feed /> */}
@@ -41,4 +44,11 @@ class App extends React.Component {
   }
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+    userId: state.auth.userId
+  }
+}
+
+export default connect(mapStateToProps)(App)
