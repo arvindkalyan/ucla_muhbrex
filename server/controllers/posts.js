@@ -58,7 +58,8 @@ export const incrementLikes = async (req, res) => {
         //step to find the previous value of the likes field 
         const postID = req.params.id
         const newLikes = Number(req.params.likes) + 1
-        const post = await PostModel.findByIdAndUpdate(postID, {likes : newLikes})
+        const userArray = req.body.usersLiked
+        const post = await PostModel.findByIdAndUpdate(postID, {likes : newLikes, usersLiked: userArray})
         res.status(201).json(post)
         //const newLikes = post.likes + 1
         

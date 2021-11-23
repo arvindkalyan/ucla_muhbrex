@@ -8,6 +8,14 @@ import './Post.css'
 class Post extends React.Component{
     constructor(props) {
         super(props)
+
+        this.processUserLiked = this.processUserLiked.bind(this);
+    }
+
+    processUserLiked() {
+        const userArray = this.props.usersLiked;
+        userArray.push(this.props.userId);
+        return userArray;
     }
     
     render() {
@@ -20,7 +28,7 @@ class Post extends React.Component{
                 {/* <p> ID: {this.props.id} </p> */}
                 <p> Timestamp: {this.props.timeStamp} </p> 
                 {(this.props.userId === this.props.creator) ? <button onClick={() => { this.props.deletePost(this.props.id) }}> Delete </button> : null}
-                {(this.props.isSignedIn) ? <button onClick={() => { this.props.addLike(this.props.id, this.props.likes)}}> Like </button> : null}
+                {(this.props.isSignedIn && !this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.addLike(this.props.id, this.props.likes, this.processUserLiked())}}> Like </button> : null}
                 {(this.props.userId === this.props.creator) ? <button onClick={() => {
                     window.location = '/edit/' + this.props.id
                     //console.log(this.props.id)

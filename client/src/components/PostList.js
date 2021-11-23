@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import "./postList.css"
 import Post from './Post.js'
 import { Link } from 'react-router-dom'
+import { connect } from "react-redux"
 import axios from 'axios'
 
 class PostList extends Component{
@@ -41,7 +42,9 @@ class PostList extends Component{
                 key={post._id}
                 id={post._id}
                 deletePost={this.deletePost}
-                addLike={this.addLike} />
+                addLike={this.addLike} 
+                usersLiked={post.usersLiked}    
+            />
                 
         })
     }
@@ -64,10 +67,13 @@ class PostList extends Component{
         })
     }
     
-    addLike(id, likes) {
+    addLike(id, likes, usersLiked) {
         console.log(`Liking post ${id}`)
         //let self = this
-        axios.post('http://localhost:5000/posts/addlikes/' + id + '/' + likes)
+        const userArray = {
+            usersLiked: usersLiked
+        }
+        axios.post('http://localhost:5000/posts/addlikes/' + id + '/' + likes, userArray)
             .then(() => {
                 console.log(`like successful`)
                 this.setState((prev) => {
@@ -106,4 +112,11 @@ class PostList extends Component{
     }
 }
 
-export default PostList
+const mapStateToProps = (state) => {
+    return {
+        isSignedIn: state.auth.isSignedIn,
+        userId: state.auth.userId
+    }
+}
+
+export default connect(mapStateToProps)(PostList)
