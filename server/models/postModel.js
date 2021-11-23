@@ -5,10 +5,6 @@ const postSchema = mongoose.Schema({
     message: String,
     creator: String,
     timeStamp : String,
-    /*timeStamp: {
-        type: Date,
-        default: new Date()
-    },*/
     likes: {
         type: Number,
         default: 0

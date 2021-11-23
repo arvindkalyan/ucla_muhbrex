@@ -52,7 +52,6 @@ export const createPost = async (req, res) => {
 
 export const incrementLikes = async (req, res) => {
     try {
-
         //we can't directly modify a field based 
         //on its previous value, so we need this intermediary 
         //step to find the previous value of the likes field 
