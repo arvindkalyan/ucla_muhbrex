@@ -26,7 +26,7 @@ function PostCreate(props) {
         axios.post("http://localhost:5000/posts/create", post)
             .then((res) => console.log(res.data))
             .catch((error) => console.log(error.message))
-        //take person back to homepage 
+        //take person back to homepage, yay 
         window.location = '/'
     }
     
