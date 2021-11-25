@@ -4,6 +4,7 @@ import {
     getPost,
     createPost,
     incrementLikes,
+    decrementLikes,
     updatePost,
     deletePost,
 } from '../controllers/posts.js'
@@ -17,6 +18,7 @@ const router = express.Router()
 router.get('/', getPosts)
 router.post('/create', createPost)
 router.post('/addlikes/:id/:likes', incrementLikes)
+router.post('/decrementLikes/:id/:likes', decrementLikes)
 
 //TODO 
 router.delete('/delete/:id', deletePost)

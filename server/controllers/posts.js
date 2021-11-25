@@ -61,10 +61,25 @@ export const incrementLikes = async (req, res) => {
         const userArray = req.body.usersLiked
         const post = await PostModel.findByIdAndUpdate(postID, {likes : newLikes, usersLiked: userArray})
         res.status(201).json(post)
-        //const newLikes = post.likes + 1
         
-        
-        //helperToLikes(postID, newLikes)
+    }
+    catch (error) {
+        res.status(404).json({message : error.message})
+    }
+}
+
+
+export const decrementLikes = async (req, res) => {
+    try {
+
+        //we can't directly modify a field based 
+        //on its previous value, so we need this intermediary 
+        //step to find the previous value of the likes field 
+        const postID = req.params.id
+        const newLikes = Number(req.params.likes) - 1
+        const userArray = req.body.usersLiked
+        const post = await PostModel.findByIdAndUpdate(postID, {likes : newLikes, usersLiked: userArray})
+        res.status(201).json(post)
         
     }
     catch (error) {

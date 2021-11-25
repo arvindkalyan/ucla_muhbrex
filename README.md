@@ -6,6 +6,6 @@ After you clone the repository, to get the development servers running, do the f
 
 If the MongoDB connection is failing, please switch to a Wifi with a non-strict firewall.
 
-when making first push to new remote  branch, do
+when making first push to new remote branch, do
 git config --global push.default current
 then git push
