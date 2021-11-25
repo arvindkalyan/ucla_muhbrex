@@ -16,6 +16,8 @@ class PostList extends Component{
         this.deletePost = this.deletePost.bind(this)
         this.addLike = this.addLike.bind(this)
         this.decrementLike = this.decrementLike.bind(this)
+        this.addDislike = this.addDislike.bind(this)
+        this.decrementDislike = this.decrementDislike.bind(this)
         console.log(this.state.posts)
     }
     
@@ -39,13 +41,17 @@ class PostList extends Component{
                 creator={post.creator}
                 message={post.message}
                 likes={post.likes}
+                dislikes={post.dislikes}
                 timeStamp={post.timeStamp}
                 key={post._id}
                 id={post._id}
                 deletePost={this.deletePost}
                 addLike={this.addLike}
                 decrementLike={this.decrementLike}
-                usersLiked={post.usersLiked}    
+                addDislike={this.addDislike}
+                decrementDislike={this.decrementDislike}
+                usersLiked={post.usersLiked}
+                usersDisliked={post.usersDisliked}
             />
                 
         })
@@ -121,6 +127,77 @@ class PostList extends Component{
                                 return {
                                     ...post,
                                     likes: Number(post.likes) - 1
+                                }
+                            }
+                            else {
+                                return post
+                            }
+                        })
+                   }
+               })
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+        
+
+     
+    }
+
+
+        
+    addDislike(id, dislikes, usersDisliked) {
+        console.log(`Disliking post ${id}`)
+        //let self = this
+        const userArray = {
+            usersDisliked: usersDisliked
+        }
+        axios.post('http://localhost:5000/posts/adddislikes/' + id + '/' + dislikes, userArray)
+            .then(() => {
+                console.log(`dislike successful`)
+                this.setState((prev) => {
+                    console.log(prev)
+                    return {
+                        posts: prev.posts.map((post) => {
+                            if (id === post._id) {
+                                return {
+                                    ...post,
+                                    dislikes: Number(post.dislikes) + 1
+                                }
+                            }
+                            else {
+                                return post
+                            }
+                        })
+                   }
+               })
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+        
+
+     
+    }
+
+
+    decrementDislike(id, dislikes, usersDisliked) {
+        console.log(`Taking away dislike from post ${id}`)
+        //let self = this
+        const userArray = {
+            usersDisliked: usersDisliked
+        }
+        axios.post('http://localhost:5000/posts/decrementDislikes/' + id + '/' + dislikes, userArray)
+            .then(() => {
+                console.log(`taking away dislike successful`)
+                this.setState((prev) => {
+                    console.log(prev)
+                    return {
+                        posts: prev.posts.map((post) => {
+                            if (id === post._id) {
+                                return {
+                                    ...post,
+                                    dislikes: Number(post.dislikes) - 1
                                 }
                             }
                             else {

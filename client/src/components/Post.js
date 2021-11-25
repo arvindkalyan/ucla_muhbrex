@@ -9,21 +9,24 @@ class Post extends React.Component{
     constructor(props) {
         super(props)
 
-        this.processUserLiked = this.processUserLiked.bind(this)
-        this.processRemoveUserLiked = this.processRemoveUserLiked.bind(this)
+        this.processAddUser = this.processAddUser.bind(this)
+        this.processRemoveUser = this.processRemoveUser.bind(this)
+        
     }
 
-    processUserLiked() {
-        const userArray = this.props.usersLiked;
+    processAddUser(userArray) {
         userArray.push(this.props.userId);
         return userArray;
     }
 
-    processRemoveUserLiked() {
-        const userArray = this.props.usersLiked;
+    processRemoveUser(userArray) {
         userArray.pop(this.props.userId)
         return userArray
     }
+
+
+    ay
+    // }
     
     render() {
         return (
@@ -32,11 +35,19 @@ class Post extends React.Component{
                 <p> Title: {this.props.title} </p>
                 <p> Message: {this.props.message} </p>
                 <p> Likes: {this.props.likes} </p>
+                <p> Dislikes: {this.props.dislikes} </p> 
                 {/* <p> ID: {this.props.id} </p> */}
                 <p> Timestamp: {this.props.timeStamp} </p> 
                 {(this.props.userId === this.props.creator) ? <button onClick={() => { this.props.deletePost(this.props.id) }}> Delete </button> : null}
-                {(this.props.isSignedIn && !this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.addLike(this.props.id, this.props.likes, this.processUserLiked())}}> Like </button> : null}
-                {(this.props.isSignedIn && this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.decrementLike(this.props.id, this.props.likes, this.processRemoveUserLiked())}}> Unlike </button> : null}
+
+                {(this.props.isSignedIn && !this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.addLike(this.props.id, this.props.likes, this.processAddUser(this.props.usersLiked))}}> Like </button> : null}
+                {(this.props.isSignedIn && this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.decrementLike(this.props.id, this.props.likes, this.processRemoveUser(this.props.usersLiked)) }}> Unlike </button> : null}
+                
+                {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.addDislike(this.props.id, this.props.dislikes, this.processAddUser(this.props.usersDisliked))}}> Dislike </button> : null}
+                {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.decrementDislike(this.props.id, this.props.dislikes, this.processRemoveUser(this.props.usersDisliked)) }}> Remove Dislike </button> : null}
+                
+
+               
                 {(this.props.userId === this.props.creator) ? <button onClick={() => {
                     window.location = '/edit/' + this.props.id
                     //console.log(this.props.id)

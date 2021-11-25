@@ -9,7 +9,12 @@ const postSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    usersLiked: [String] 
+    dislikes: {
+        type: Number,
+        default: 0
+    },
+    usersLiked: [String],
+    usersDisliked: [String]
 })
 
 const PostModel = mongoose.model('PostModel', postSchema)

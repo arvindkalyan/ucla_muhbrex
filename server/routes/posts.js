@@ -5,6 +5,8 @@ import {
     createPost,
     incrementLikes,
     decrementLikes,
+    incrementDislikes,
+    decrementDislikes, 
     updatePost,
     deletePost,
 } from '../controllers/posts.js'
@@ -19,6 +21,9 @@ router.get('/', getPosts)
 router.post('/create', createPost)
 router.post('/addlikes/:id/:likes', incrementLikes)
 router.post('/decrementLikes/:id/:likes', decrementLikes)
+
+router.post('/adddislikes/:id/:dislikes', incrementDislikes)
+router.post('/decrementDislikes/:id/:dislikes', decrementDislikes)
 
 //TODO 
 router.delete('/delete/:id', deletePost)
