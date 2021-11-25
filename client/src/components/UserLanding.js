@@ -14,6 +14,7 @@ class UserLanding extends React.Component {
 
         this.deletePost = this.deletePost.bind(this)
         this.addLike = this.addLike.bind(this)
+        this.decrementLike = this.decrementLike.bind(this)
         console.log(this.state.posts)
     }
 
@@ -77,7 +78,41 @@ class UserLanding extends React.Component {
             .catch((error) => {
                 console.log(error.message)
             })     
-    } 
+    }
+    
+    decrementLike(id, likes, usersLiked) {
+        console.log(`Taking away like from post ${id}`)
+        //let self = this
+        const userArray = {
+            usersLiked: usersLiked
+        }
+        axios.post('http://localhost:5000/posts/decrementLikes/' + id + '/' + likes, userArray)
+            .then(() => {
+                console.log(`taking away like successful`)
+                this.setState((prev) => {
+                    console.log(prev)
+                    return {
+                        posts: prev.posts.map((post) => {
+                            if (id === post._id) {
+                                return {
+                                    ...post,
+                                    likes: Number(post.likes) - 1
+                                }
+                            }
+                            else {
+                                return post
+                            }
+                        })
+                   }
+               })
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+        
+
+     
+    }
 
     renderPosts() {
         return this.state.posts.map((post) => {
@@ -92,7 +127,8 @@ class UserLanding extends React.Component {
                         key={post._id}
                         id={post._id}
                         deletePost={this.deletePost}
-                        addLike={this.addLike} 
+                        addLike={this.addLike}
+                        decrementLike={this.decrementLike}
                         usersLiked={post.usersLiked} 
                     />
                 )
