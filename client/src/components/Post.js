@@ -25,12 +25,12 @@ class Post extends React.Component{
     }
 
 
-    ay
-    // }
+   
     
     render() {
         return (
             <div>
+                {/* please remove the creator line  */}
                 <p> Creator: {this.props.creator} </p>
                 <p> Title: {this.props.title} </p>
                 <p> Message: {this.props.message} </p>
@@ -40,9 +40,11 @@ class Post extends React.Component{
                 <p> Timestamp: {this.props.timeStamp} </p> 
                 {(this.props.userId === this.props.creator) ? <button onClick={() => { this.props.deletePost(this.props.id) }}> Delete </button> : null}
 
+                {/* the following two lines are for like/unlike button */}
                 {(this.props.isSignedIn && !this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.addLike(this.props.id, this.props.likes, this.processAddUser(this.props.usersLiked))}}> Like </button> : null}
                 {(this.props.isSignedIn && this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.decrementLike(this.props.id, this.props.likes, this.processRemoveUser(this.props.usersLiked)) }}> Unlike </button> : null}
                 
+                {/* the following two lines are for dislike/remove dislike button */}
                 {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.addDislike(this.props.id, this.props.dislikes, this.processAddUser(this.props.usersDisliked))}}> Dislike </button> : null}
                 {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.decrementDislike(this.props.id, this.props.dislikes, this.processRemoveUser(this.props.usersDisliked)) }}> Remove Dislike </button> : null}
                 
