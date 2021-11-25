@@ -50,14 +50,15 @@ export const createPost = async (req, res) => {
     }
 }
 
-export const incrementLikes = async (req, res) => {
+
+export const changeLikes = async (req, res) => {
     try {
 
         //we can't directly modify a field based 
         //on its previous value, so we need this intermediary 
         //step to find the previous value of the likes field 
         const postID = req.params.id
-        const newLikes = Number(req.params.likes) + 1
+        const newLikes = Number(req.params.likes)
         const userArray = req.body.usersLiked
         const post = await PostModel.findByIdAndUpdate(postID, {likes : newLikes, usersLiked: userArray})
         res.status(201).json(post)
@@ -69,34 +70,14 @@ export const incrementLikes = async (req, res) => {
 }
 
 
-export const decrementLikes = async (req, res) => {
+export const changeDislikes = async (req, res) => {
     try {
 
         //we can't directly modify a field based 
         //on its previous value, so we need this intermediary 
         //step to find the previous value of the likes field 
         const postID = req.params.id
-        const newLikes = Number(req.params.likes) - 1
-        const userArray = req.body.usersLiked
-        const post = await PostModel.findByIdAndUpdate(postID, {likes : newLikes, usersLiked: userArray})
-        res.status(201).json(post)
-        
-    }
-    catch (error) {
-        res.status(404).json({message : error.message})
-    }
-}
-
-
-
-export const incrementDislikes = async (req, res) => {
-    try {
-
-        //we can't directly modify a field based 
-        //on its previous value, so we need this intermediary 
-        //step to find the previous value of the likes field 
-        const postID = req.params.id
-        const newDislikes = Number(req.params.dislikes) + 1
+        const newDislikes = Number(req.params.dislikes)
         const userArray = req.body.usersDisliked
         const post = await PostModel.findByIdAndUpdate(postID, {dislikes : newDislikes, usersDisliked: userArray})
         res.status(201).json(post)
@@ -108,23 +89,43 @@ export const incrementDislikes = async (req, res) => {
 }
 
 
-export const decrementDislikes = async (req, res) => {
-    try {
 
-        //we can't directly modify a field based 
-        //on its previous value, so we need this intermediary 
-        //step to find the previous value of the likes field 
-        const postID = req.params.id
-        const newDislikes = Number(req.params.dislikes) - 1
-        const userArray = req.body.usersDisliked
-        const post = await PostModel.findByIdAndUpdate(postID, {dislikes : newDislikes, usersDisliked: userArray})
-        res.status(201).json(post)
+// export const incrementDislikes = async (req, res) => {
+//     try {
+
+//         //we can't directly modify a field based 
+//         //on its previous value, so we need this intermediary 
+//         //step to find the previous value of the likes field 
+//         const postID = req.params.id
+//         const newDislikes = Number(req.params.dislikes) + 1
+//         const userArray = req.body.usersDisliked
+//         const post = await PostModel.findByIdAndUpdate(postID, {dislikes : newDislikes, usersDisliked: userArray})
+//         res.status(201).json(post)
         
-    }
-    catch (error) {
-        res.status(404).json({message : error.message})
-    }
-}
+//     }
+//     catch (error) {
+//         res.status(404).json({message : error.message})
+//     }
+// }
+
+
+// export const decrementDislikes = async (req, res) => {
+//     try {
+
+//         //we can't directly modify a field based 
+//         //on its previous value, so we need this intermediary 
+//         //step to find the previous value of the likes field 
+//         const postID = req.params.id
+//         const newDislikes = Number(req.params.dislikes) - 1
+//         const userArray = req.body.usersDisliked
+//         const post = await PostModel.findByIdAndUpdate(postID, {dislikes : newDislikes, usersDisliked: userArray})
+//         res.status(201).json(post)
+        
+//     }
+//     catch (error) {
+//         res.status(404).json({message : error.message})
+//     }
+// }
 export const updatePost = async (req, res) => {
     try {
         const post = await PostModel.findByIdAndUpdate(req.params.id,

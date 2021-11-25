@@ -13,10 +13,8 @@ class UserLanding extends React.Component {
         }
 
         this.deletePost = this.deletePost.bind(this)
-        this.addLike = this.addLike.bind(this)
-        this.decrementLike = this.decrementLike.bind(this)
-        this.addDislike = this.addDislike.bind(this)
-        this.decrementDislike = this.decrementDislike.bind(this)
+        this.changeLike = this.changeLike.bind(this)
+        this.changeDislike = this.changeDislike.bind(this)
         console.log(this.state.posts)
     }
 
@@ -51,13 +49,13 @@ class UserLanding extends React.Component {
         })
     }
     
-    addLike(id, likes, usersLiked) {
-        console.log(`Liking post ${id}`)
+    changeLike(id, likes, usersLiked) {
+        console.log(`Changing likes on post ${id}`)
         //let self = this
         const userArray = {
             usersLiked: usersLiked
         }
-        axios.post('http://localhost:5000/posts/addlikes/' + id + '/' + likes, userArray)
+        axios.post('http://localhost:5000/posts/changeLikes/' + id + '/' + likes, userArray)
             .then(() => {
                 console.log(`like successful`)
                 this.setState((prev) => {
@@ -67,38 +65,7 @@ class UserLanding extends React.Component {
                             if (id === post._id) {
                                 return {
                                     ...post,
-                                    likes: Number(post.likes) + 1
-                                }
-                            }
-                            else {
-                                return post
-                            }
-                        })
-                   }
-               })
-            })
-            .catch((error) => {
-                console.log(error.message)
-            })     
-    }
-    
-    decrementLike(id, likes, usersLiked) {
-        console.log(`Taking away like from post ${id}`)
-        //let self = this
-        const userArray = {
-            usersLiked: usersLiked
-        }
-        axios.post('http://localhost:5000/posts/decrementLikes/' + id + '/' + likes, userArray)
-            .then(() => {
-                console.log(`taking away like successful`)
-                this.setState((prev) => {
-                    console.log(prev)
-                    return {
-                        posts: prev.posts.map((post) => {
-                            if (id === post._id) {
-                                return {
-                                    ...post,
-                                    likes: Number(post.likes) - 1
+                                    likes: likes
                                 }
                             }
                             else {
@@ -115,15 +82,13 @@ class UserLanding extends React.Component {
 
      
     }
-
-
-    addDislike(id, dislikes, usersDisliked) {
-        console.log(`Disliking post ${id}`)
-        //let self = this
+    
+    changeDislike(id, dislikes, usersDisliked) {
+        console.log(`Changing dislikes on post ${id}`)
         const userArray = {
             usersDisliked: usersDisliked
         }
-        axios.post('http://localhost:5000/posts/adddislikes/' + id + '/' + dislikes, userArray)
+        axios.post('http://localhost:5000/posts/changeDislikes/' + id + '/' + dislikes, userArray)
             .then(() => {
                 console.log(`dislike successful`)
                 this.setState((prev) => {
@@ -133,42 +98,7 @@ class UserLanding extends React.Component {
                             if (id === post._id) {
                                 return {
                                     ...post,
-                                    dislikes: Number(post.dislikes) + 1
-                                }
-                            }
-                            else {
-                                return post
-                            }
-                        })
-                   }
-               })
-            })
-            .catch((error) => {
-                console.log(error.message)
-            })
-        
-
-     
-    }
-
-
-    decrementDislike(id, dislikes, usersDisliked) {
-        console.log(`Taking away dislike from post ${id}`)
-        //let self = this
-        const userArray = {
-            usersDisliked: usersDisliked
-        }
-        axios.post('http://localhost:5000/posts/decrementDislikes/' + id + '/' + dislikes, userArray)
-            .then(() => {
-                console.log(`taking away dislike successful`)
-                this.setState((prev) => {
-                    console.log(prev)
-                    return {
-                        posts: prev.posts.map((post) => {
-                            if (id === post._id) {
-                                return {
-                                    ...post,
-                                    dislikes: Number(post.dislikes) - 1
+                                    dislikes: dislikes
                                 }
                             }
                             else {
@@ -192,17 +122,6 @@ class UserLanding extends React.Component {
             if (this.props.userId === post.creator) {
                 return  (
                     <Post 
-                        // title={post.title}
-                        // creator={post.creator}
-                        // message={post.message}
-                        // likes={post.likes}
-                        // timeStamp={post.timeStamp}
-                        // key={post._id}
-                        // id={post._id}
-                        // deletePost={this.deletePost}
-                        // addLike={this.addLike}
-                        // decrementLike={this.decrementLike}
-                        // usersLiked={post.usersLiked}
                         creator={post.creator}
                         message={post.message}
                         likes={post.likes}
@@ -211,10 +130,8 @@ class UserLanding extends React.Component {
                         key={post._id}
                         id={post._id}
                         deletePost={this.deletePost}
-                        addLike={this.addLike}
-                        decrementLike={this.decrementLike}
-                        addDislike={this.addDislike}
-                        decrementDislike={this.decrementDislike}
+                        changeLike={this.changeLike}
+                        changeDislike={this.changeDislike}
                         usersLiked={post.usersLiked}
                         usersDisliked={post.usersDisliked}
                     />
