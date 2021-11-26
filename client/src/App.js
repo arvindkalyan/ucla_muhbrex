@@ -12,6 +12,8 @@ import "./App.css"
 import GoogleAuth from './components/GoogleAuth.js'
 //import PostCreateButton from './components/PostCreateButton.js'
 import UserLanding from './components/UserLanding.js'
+import ExpandedPost from './components/ExpandedPost.js'
+import Post from './components/Post.js'
 
 class App extends React.Component {
   render() {
@@ -30,6 +32,7 @@ class App extends React.Component {
             <Route path="/create" element={<PostCreate />} />
             <Route path="/edit/:id" element={<PostEdit />} />
             <Route path="/user/:id" element={<UserLanding />} />
+            <Route path="/post/:id" element={<ExpandedPost />} />
 
             
           </Routes>
