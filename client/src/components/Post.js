@@ -38,7 +38,7 @@ class Post extends React.Component{
                 <p> Dislikes: {this.props.dislikes} </p> 
                 {/* <p> ID: {this.props.id} </p> */}
                 <p> Timestamp: {this.props.timeStamp} </p> 
-                {(this.props.userId === this.props.creator) ? <button onClick={() => { this.props.deletePost(this.props.id) }}> Delete </button> : null}
+                {(this.props.userId === this.props.creator) ? <button onClick={() => { this.props.deletePost(this.props.id, this.props.usersDisliked) }}> Delete </button> : null}
 
                 {/* the following two lines are for like/unlike button */}
                
@@ -47,12 +47,12 @@ class Post extends React.Component{
                 {(this.props.isSignedIn && this.props.usersLiked.includes(this.props.userId)) ? <button onClick={() => { this.props.changeLike(this.props.id, this.props.likes - 1, this.processRemoveUser(this.props.usersLiked)) }}> Unlike </button> : null}
                 
                 {/* the following two lines are for dislike/remove dislike button */}
-                {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.changeDislike(this.props.id, this.props.dislikes + 1, this.processAddUser(this.props.usersDisliked))}}> Dislike </button> : null}
-                {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.changeDislike(this.props.id, this.props.dislikes - 1, this.processRemoveUser(this.props.usersDisliked)) }}> Remove Dislike </button> : null}
+                {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.changeDislike(this.props.id, this.props.dislikes + 1, this.processAddUser(this.props.usersDisliked), this.props.creator, true)}}> Dislike </button> : null}
+                {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <button onClick={() => { this.props.changeDislike(this.props.id, this.props.dislikes - 1, this.processRemoveUser(this.props.usersDisliked), this.props.creator, false) }}> Remove Dislike </button> : null}
                 
 
                
-                {(this.props.userId === this.props.creator) ? <button onClick={() => {
+                {(this.props.userId === this.props.creator && this.props.dislikesT < 5) ? <button onClick={() => {
                     window.location = '/edit/' + this.props.id
                     //console.log(this.props.id)
                 }}> Edit </button> : null}
@@ -64,7 +64,8 @@ class Post extends React.Component{
 const mapStateToProps = (state) => {
     return {
         isSignedIn: state.auth.isSignedIn,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        dislikesT: state.likes.dislikes
     }
 }
 

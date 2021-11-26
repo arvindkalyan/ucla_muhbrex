@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import authReducer from './authReducer';
+import likesReducer from './likesReducer';
 
 /*
 Connecting to global state
@@ -19,5 +20,6 @@ Reducers and Actions
 */
 
 export default combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    likes: likesReducer
 });
