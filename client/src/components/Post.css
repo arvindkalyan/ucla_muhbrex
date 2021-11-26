@@ -1,5 +1,10 @@
 .post{
+    
+    cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
     border-bottom: 1px solid orange;
-    padding: 0 70px
+    border-top: 1px solid orange;
+    border-right: 1px solid orange;
+    border-left: 1px solid orange;
+    padding: 0 70px;
 }
