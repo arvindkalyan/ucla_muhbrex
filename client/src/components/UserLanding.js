@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import Post from './Post';
 import axios from 'axios';
@@ -122,6 +122,7 @@ class UserLanding extends React.Component {
             if (this.props.userId === post.creator) {
                 return  (
                     <Post 
+                        title={post.title}
                         creator={post.creator}
                         message={post.message}
                         likes={post.likes}
@@ -136,15 +137,20 @@ class UserLanding extends React.Component {
                         usersDisliked={post.usersDisliked}
                     />
                 )
-            } 
+            } else {
+                return null;
+            }
         })
     }
 
     render() {
         return (
-            <div className="container">
-                <div className="UserLanding">
-                    {this.renderPosts()}
+            <div>
+                <h1>{this.props.userEmail}</h1>
+                <div className="container">
+                    <div className="UserLanding">
+                        {this.renderPosts()}
+                    </div>
                 </div>
             </div>
         )
@@ -154,7 +160,8 @@ class UserLanding extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isSignedIn: state.auth.isSignedIn,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        userEmail: state.auth.userEmail
     }
 }
 
