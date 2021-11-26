@@ -134,6 +134,7 @@ class UserLanding extends React.Component {
                         changeDislike={this.changeDislike}
                         usersLiked={post.usersLiked}
                         usersDisliked={post.usersDisliked}
+                        onClick={() => window.location = '/post/' + post._id}
                     />
                 )
             } 

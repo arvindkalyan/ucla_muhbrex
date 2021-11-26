@@ -29,7 +29,7 @@ class Post extends React.Component{
     
     render() {
         return (
-            <div>
+            <div onClick={() => this.props.onClick()}>
                 {/* please remove the creator line  */}
                 <p> Creator: {this.props.creator} </p>
                 <p> Title: {this.props.title} </p>
