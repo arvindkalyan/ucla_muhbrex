@@ -1,17 +1,23 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useState,
+    useRef
+} from 'react';
 import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 import Post from './Post';
-import axios from 'axios';
-import './postList.css'
+import PostList from './PostList';
+import { withRouter, useLocation} from "react-router";
 
-class UserLanding extends React.Component {
+
+class ExpandedPost extends React.Component {
     constructor(props) {
         super(props)
-
         this.state = {
             posts: []
         }
-
+        
         this.deletePost = this.deletePost.bind(this)
         this.changeLike = this.changeLike.bind(this)
         this.changeDislike = this.changeDislike.bind(this)
@@ -19,11 +25,15 @@ class UserLanding extends React.Component {
     }
 
     componentDidMount() {
+        let id = window.location.pathname.slice(6)
+        console.log(id)
+        console.log('http://localhost:5000/posts/get/' + id)
         console.log("setting posts")
-        axios.get('http://localhost:5000/posts')
+        //console.log("CONSTRUCTOR CALL")
+        axios.get('http://localhost:5000/posts/get/' + id)
             .then((res) => {
                 this.setState({
-                    posts : res.data
+                    posts :[res.data]
                 })
                
             }).catch((error) => {
@@ -47,6 +57,7 @@ class UserLanding extends React.Component {
         this.setState({
             posts : this.state.posts.filter((post) => post._id !== id)
         })
+        window.location = '/'
     }
     
     changeLike(id, likes, usersLiked) {
@@ -118,11 +129,12 @@ class UserLanding extends React.Component {
 
 
     renderPosts() {
+        console.log(this.props)
+        console.log(this.state.posts)
+
         return this.state.posts.map((post) => {
-            if (this.props.userId === post.creator) {
                 return  (
-                    <Post 
-                        title={post.title}
+                    <Post title = {post.title}
                         creator={post.creator}
                         message={post.message}
                         likes={post.likes}
@@ -135,23 +147,18 @@ class UserLanding extends React.Component {
                         changeDislike={this.changeDislike}
                         usersLiked={post.usersLiked}
                         usersDisliked={post.usersDisliked}
-                        onClick={() => window.location = '/post/' + post._id}
+                        onClick={() => {}}
                     />
                 )
-            } else {
-                return null;
-            }
-        })
+            } 
+        )
     }
 
     render() {
         return (
-            <div>
-                <h1>{this.props.userEmail}</h1>
-                <div className="container">
-                    <div className="UserLanding">
-                        {this.renderPosts()}
-                    </div>
+            <div className="container">
+                <div className="ExpandedPost">
+                    {this.renderPosts()}
                 </div>
             </div>
         )
@@ -161,9 +168,7 @@ class UserLanding extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isSignedIn: state.auth.isSignedIn,
-        userId: state.auth.userId,
-        userEmail: state.auth.userEmail
+        userId: state.auth.userId
     }
 }
-
-export default connect(mapStateToProps)(UserLanding);
+export default connect(mapStateToProps)(ExpandedPost);

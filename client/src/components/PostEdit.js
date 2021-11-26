@@ -41,7 +41,7 @@ const PostEdit = () => {
             .then((res) => console.log(res.data))
             .catch((error) => console.log(error.message))
         //take person back to homepage 
-        window.location = '/'
+        window.location = '/post/'+id
     }
 
     return (
