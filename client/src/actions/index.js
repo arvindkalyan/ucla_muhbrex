@@ -13,3 +13,12 @@ export const signOut = () => {
         type: 'SIGN_OUT'
     };
 };
+
+export const setDislike = dislikes => {
+    return {
+        type: 'SET_DISLIKES',
+        payload: {
+            dislikes: dislikes
+        }
+    }
+}

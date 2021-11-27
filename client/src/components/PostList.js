@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import "./postList.css"
 import Post from './Post.js'
 import { connect } from "react-redux"
+import { setDislike } from "../actions"
 import axios from 'axios'
 
 class PostList extends Component{
@@ -25,11 +26,27 @@ class PostList extends Component{
                 this.setState({
                     posts : res.data
                 })
-               
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 console.log(error.message)
             })
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.userId !== prevProps.userId) {
+            let dislikesCount = 0;
+            this.state.posts.map((post) => {
+                if (post.creator === this.props.userId) {
+                    dislikesCount += post.usersDisliked.length;
+                }
+            })
+            this.props.setDislike(dislikesCount);
+        }
+        if (this.props.dislikesT !== prevProps.dislikesT) {
+            this.render()
+        }
+    }
+
 
     
     renderPosts() {
@@ -53,8 +70,10 @@ class PostList extends Component{
         })
     }
 
-    deletePost(id) {
+    deletePost(id, usersDisliked) {
         console.log("deleting")
+        console.log(usersDisliked)
+        this.props.setDislike(this.props.dislikesT - usersDisliked.length)
         
         //for some reason this shit did not work 
         //const url = 'http://localhost:5000/posts/delete/' + id
@@ -104,8 +123,12 @@ class PostList extends Component{
      
     }
 
-    changeDislike(id, dislikes, usersDisliked) {
-        console.log(`Changing dislikes on post ${id}`)
+    changeDislike(id, dislikes, usersDisliked, creator, added) {
+        //console.log(`Changing dislikes on post ${id}`)
+        if (creator === this.props.userId) {
+            (added) ? this.props.setDislike(this.props.dislikesT + 1) : this.props.setDislike(this.props.dislikesT - 1)
+            //console.log(this.props.dislikesT)
+        }
         const userArray = {
             usersDisliked: usersDisliked
         }
@@ -113,7 +136,7 @@ class PostList extends Component{
             .then(() => {
                 console.log(`dislike successful`)
                 this.setState((prev) => {
-                    console.log(prev)
+                    //console.log(prev)
                     return {
                         posts: prev.posts.map((post) => {
                             if (id === post._id) {
@@ -141,6 +164,7 @@ class PostList extends Component{
     render() {
         return (
             <div className={"container"}>
+                <div>{this.props.dislikesT}</div>
                 <div className={"postList"}>
                 {this.renderPosts()}
                 </div>
@@ -152,8 +176,9 @@ class PostList extends Component{
 const mapStateToProps = (state) => {
     return {
         isSignedIn: state.auth.isSignedIn,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        dislikesT: state.likes.dislikes
     }
 }
 
-export default connect(mapStateToProps)(PostList)
+export default connect(mapStateToProps, { setDislike })(PostList)

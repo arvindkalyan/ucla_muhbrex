@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Post from './Post';
-
+import { setDislike } from '../actions'
 
 
 class ExpandedPost extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            post: null
+            post: null,
+            posts: []
         }
         
         this.deletePost = this.deletePost.bind(this)
@@ -19,6 +20,7 @@ class ExpandedPost extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props.dislikesT)
         let id = window.location.pathname.slice(6)
         console.log(id)
         console.log('http://localhost:5000/posts/get/' + id)
@@ -32,6 +34,27 @@ class ExpandedPost extends React.Component {
             }).catch((error) => {
                 console.log(error.message)
             })
+        axios.get('http://localhost:5000/posts')
+            .then((res) => {
+                this.setState({
+                    posts : res.data
+                })
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.userId !== prevProps.userId) {
+            let dislikesCount = 0;
+            this.state.posts.map((post) => {
+                if (post.creator === this.props.userId) {
+                    dislikesCount += post.usersDisliked.length;
+                }
+            })
+            this.props.setDislike(dislikesCount);
+        }
     }
 
     deletePost(id) {
@@ -74,8 +97,13 @@ class ExpandedPost extends React.Component {
      
     }
     
-    changeDislike(id, dislikes, usersDisliked) {
+    changeDislike(id, dislikes, usersDisliked, creator, added) {
         console.log(`Changing dislikes on post ${id}`)
+        console.log(this.props.dislikesT)
+        if (creator === this.props.userId) {
+            (added) ? this.props.setDislike(this.props.dislikesT + 1) : this.props.setDislike(this.props.dislikesT - 1)
+            console.log(this.props.dislikesT)
+        }
         const userArray = {
             usersDisliked: usersDisliked
         }
@@ -121,6 +149,7 @@ class ExpandedPost extends React.Component {
     render() {
         return (
             <div className="container">
+                {/*<div>{this.props.dislikesT}</div>*/}
                 <div className="ExpandedPost">
                    {this.renderPost()}
                 </div>
@@ -132,7 +161,8 @@ class ExpandedPost extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isSignedIn: state.auth.isSignedIn,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        dislikesT: state.likes.dislikes
     }
 }
-export default connect(mapStateToProps)(ExpandedPost);
+export default connect(mapStateToProps, { setDislike })(ExpandedPost);

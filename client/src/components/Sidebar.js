@@ -16,7 +16,7 @@ function Sidebar(props){
         
           <SidebarOption active text="UCLA" link="/" Icon={HomeIcon}/> 
           <SidebarOption text="Posts" link="/" Icon={Message}/> 
-          {props.isSignedIn && <SidebarOption text="Create Post" link="/create" Icon={AddIcon}/>}
+          {props.isSignedIn && (props.dislikes < 5) && <SidebarOption text="Create Post" link="/create" Icon={AddIcon}/>}
           {props.isSignedIn && <SidebarOption text="User" link={`/user/${props.userId}`} Icon={PersonOutline}/>}
 
         </div>
@@ -26,7 +26,8 @@ function Sidebar(props){
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    dislikes: state.likes.dislikes
   }
 }
 
