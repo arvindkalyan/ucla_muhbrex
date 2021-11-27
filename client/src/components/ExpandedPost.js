@@ -1,27 +1,21 @@
-import React, {
-    useEffect,
-    useState,
-    useRef
-} from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import Post from './Post';
-import PostList from './PostList';
-import { withRouter, useLocation} from "react-router";
+
 
 
 class ExpandedPost extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            posts: []
+            post: null
         }
         
         this.deletePost = this.deletePost.bind(this)
         this.changeLike = this.changeLike.bind(this)
         this.changeDislike = this.changeDislike.bind(this)
-        console.log(this.state.posts)
+        this.renderPost = this.renderPost.bind(this)
     }
 
     componentDidMount() {
@@ -29,11 +23,10 @@ class ExpandedPost extends React.Component {
         console.log(id)
         console.log('http://localhost:5000/posts/get/' + id)
         console.log("setting posts")
-        //console.log("CONSTRUCTOR CALL")
         axios.get('http://localhost:5000/posts/get/' + id)
             .then((res) => {
                 this.setState({
-                    posts :[res.data]
+                    post : res.data
                 })
                
             }).catch((error) => {
@@ -55,7 +48,7 @@ class ExpandedPost extends React.Component {
                 console.log(error.message)
             })
         this.setState({
-            posts : this.state.posts.filter((post) => post._id !== id)
+            post: null
         })
         window.location = '/'
     }
@@ -69,22 +62,9 @@ class ExpandedPost extends React.Component {
         axios.post('http://localhost:5000/posts/changeLikes/' + id + '/' + likes, userArray)
             .then(() => {
                 console.log(`like successful`)
-                this.setState((prev) => {
-                    console.log(prev)
-                    return {
-                        posts: prev.posts.map((post) => {
-                            if (id === post._id) {
-                                return {
-                                    ...post,
-                                    likes: likes
-                                }
-                            }
-                            else {
-                                return post
-                            }
-                        })
-                   }
-               })
+                this.setState({
+                    post: {...this.state.post, likes: likes}
+                })
             })
             .catch((error) => {
                 console.log(error.message)
@@ -102,22 +82,9 @@ class ExpandedPost extends React.Component {
         axios.post('http://localhost:5000/posts/changeDislikes/' + id + '/' + dislikes, userArray)
             .then(() => {
                 console.log(`dislike successful`)
-                this.setState((prev) => {
-                    console.log(prev)
-                    return {
-                        posts: prev.posts.map((post) => {
-                            if (id === post._id) {
-                                return {
-                                    ...post,
-                                    dislikes: dislikes
-                                }
-                            }
-                            else {
-                                return post
-                            }
-                        })
-                   }
-               })
+                this.setState({
+                    post: {...this.state.post, dislikes: dislikes}
+                })
             })
             .catch((error) => {
                 console.log(error.message)
@@ -128,13 +95,10 @@ class ExpandedPost extends React.Component {
     }
 
 
-    renderPosts() {
-        console.log(this.props)
-        console.log(this.state.posts)
-
-        return this.state.posts.map((post) => {
-                return  (
-                    <Post title = {post.title}
+    renderPost() {
+        const post = this.state.post
+        if (post !== null) {
+             return <Post title = {post.title}
                         creator={post.creator}
                         message={post.message}
                         likes={post.likes}
@@ -149,16 +113,16 @@ class ExpandedPost extends React.Component {
                         usersDisliked={post.usersDisliked}
                         onClick={() => {}}
                     />
-                )
-            } 
-        )
+        }
+        return <div>  </div>
+       
     }
 
     render() {
         return (
             <div className="container">
                 <div className="ExpandedPost">
-                    {this.renderPosts()}
+                   {this.renderPost()}
                 </div>
             </div>
         )

@@ -25,7 +25,7 @@ const PostEdit = () => {
             }).catch((error) => {
                 console.log(error.message)
             })
-    }, []);
+    }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -41,7 +41,7 @@ const PostEdit = () => {
             .then((res) => console.log(res.data))
             .catch((error) => console.log(error.message))
         //take person back to homepage 
-        window.location = '/post/'+id
+        window.location = '/post/'+ id
     }
 
     return (
