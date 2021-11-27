@@ -21,6 +21,7 @@ class App extends React.Component {
       <div className="app">
 
         <Router>
+          {/* put ucla muhbrex logo here */}
           {/* TODO: Make the following set of stuff 
                 before the Routes block into an actual nice navbar */}
           <GoogleAuth />

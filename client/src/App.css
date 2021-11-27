@@ -1,6 +1,8 @@
 body {
-    --twitter-color: #50b7f5;
-    --twitter-background: #e6ecf0;
+    --ucla-blue: #2774AE;
+    --muh-color: #50b7f5;
+    --muh-background: #e8f5fe;
+    --muh-border: whitesmoke; /*#d3d2d2*/
 }
   
 .app {

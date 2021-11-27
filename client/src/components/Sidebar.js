@@ -18,7 +18,7 @@ function Sidebar(props){
     return (
         <div className = 'sidebar'>
         
-          <SidebarOption active text="UCLA" link="/" Icon={HomeIcon}/> 
+          <SidebarOption text="UCLA" link="/" Icon={HomeIcon}/> 
           <SidebarOption text="Posts" link="/" Icon={Message}/> 
           {props.isSignedIn && <SidebarOption text="Create Post" link="/create" Icon={AddIcon}/>}
           {props.isSignedIn && <SidebarOption text="User" link={`/user/${props.userId}`} Icon={PersonOutline}/>}

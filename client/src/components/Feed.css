@@ -1,19 +1,21 @@
 
 .feed {
     flex: 0.4;
-    border-right: 1px solid orange;
+    border-right: 1px solid var(--muh-border);
     min-width: fit-content;
     overflow-y: scroll;
+    background-color: var(--muh-border);
   }
 
   .feed__header {
-    position: sticky;
+    position: sticky !important;
     top: 0;
     background-color: white;
     z-index: 100;
-    border: 1px solid var(--twitter-background);
+    border: 1px solid var(--muh-border);
     padding: 15px 20px;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--muh-border);
   }
 
   .feed__header > h2 {

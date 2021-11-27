@@ -1,6 +1,6 @@
 .sidebar {
-  
-    border-right: 1px solid gray;
+  background-color: gainsboro;
+    border-right: 1px solid var(--muh-border);
     flex: 0.3;
     min-width: 250px;
     margin-top: 20px;
