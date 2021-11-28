@@ -1,6 +1,6 @@
 .sidebar {
-  /* background-color: whitesmoke; */
-  border-right: 1px solid var(--muh-border);
+  /* background-color: #fcf8f0; */
+  border-right: 1px solid var(--muh-background);
   flex: 0.3;
   min-width: 250px;
   /* margin-top: 20px; */

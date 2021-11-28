@@ -35,7 +35,7 @@ function PostCreate(props) {
         <div className="postcreate">
             <div className="header"><h2> Create a New Post! </h2></div> 
             <div className="form"><form onSubmit={handleSubmit}>
-                <div><label>
+                <div className='title'><label>
                     <input
                         ref={title}
                         name="title"
@@ -43,15 +43,15 @@ function PostCreate(props) {
                     /> 
                 </label> </div>
                 
-                <div><label>
-                    <input
+                <div className='message'><label>
+                    <textarea
                         ref={message}
                         name="message"
                         placeholder="Your Moving Message"
                     /> 
                 </label></div>
                 
-            <button type="submit"> Create Post </button>
+                <button type="submit"> Create Post </button>
             </form> </div>
                 
         </div>

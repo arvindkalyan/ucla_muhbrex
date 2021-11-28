@@ -16,6 +16,7 @@
     border: 1px solid var(--ucla-blue);
     padding: 10px 15px;
     font-family: Arial, Helvetica, sans-serif;
+    color: white;
   }
 
   .feed__header > h2 {
