@@ -1,7 +1,7 @@
-.postCreate {
+.postEdit {
     background-color: var(--muh-background);
 }
-.postCreate__header{
+.postEdit__header{
     position: sticky !important;
     top: 0;
     /* background-color: white; */
@@ -13,30 +13,33 @@
     width: 77vw;
 }
 
-.postCreate__header > h2 {
+.postEdit__header > h2 {
     text-align: center;
     font-size: 40px;
     font-weight: 800;
     color: white;
 }
 
-.postCreate__form{
+.postEdit__form{
     box-sizing: border-box;
     width: 70vw;
     margin-left: auto;
     margin-right: auto;
     padding-top: 20px;
     padding-bottom: 20px;
+    /* display: flex; */
+    /* flex-direction: column; */
 }
 
-.postCreate__form > form{
+.postEdit__form > form{
     display: flex;
     flex-direction: column;
+    /* padding-top: 10px; */
 }
 
-.postCreate__form input, textarea{
+.postEdit__form input, textarea{
     display: block;
-    width: 97% !important;
+    width: 97%;
     padding: .5rem .8rem .5rem .8rem;
     margin: .9vw 0 ;
     border:0;
@@ -45,15 +48,15 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.postCreate__form input {
+.postEdit__form input {
     font-weight: bold;
 }
 
-.postCreate__form textarea {
+.postEdit__form textarea {
     height: 15vh;
 }
 
-.postCreate__form button {
+.postEdit__form button {
     /* display: inline-block; */
     /* width: 30%; */
     height: 3rem;
@@ -66,9 +69,16 @@
     color: white;
 }
 
-.postCreate__form button:hover {
+.postEdit__form button:hover {
     background-color: var(--muh-color) !important;
     border-radius: 30px !important;
     /* color: var(--ucla-blue) !important; */
     transition: color 10ms ease-in-out !important;
+}
+
+.postEdit__form p {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ucla-blue);
+    font-weight: bolder;
 }

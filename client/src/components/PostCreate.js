@@ -32,10 +32,10 @@ function PostCreate(props) {
     }
     
     return (
-        <div className="postcreate">
-            <div className="header"><h2> Create a New Post! </h2></div> 
-            <div className="form"><form onSubmit={handleSubmit}>
-                <div className='title'><label>
+        <div className="postCreate">
+            <div className="postCreate__header"><h2> Create a New Post! </h2></div> 
+            <div className="postCreate__form"><form onSubmit={handleSubmit}>
+                <div><label>
                     <input
                         ref={title}
                         name="title"
@@ -43,7 +43,7 @@ function PostCreate(props) {
                     /> 
                 </label> </div>
                 
-                <div className='message'><label>
+                <div><label>
                     <textarea
                         ref={message}
                         name="message"
