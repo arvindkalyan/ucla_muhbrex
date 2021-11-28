@@ -1,13 +1,4 @@
-
-.feed {
-    border-right: 1px solid var(--muh-background);
-    /* min-width: 70vw; */
-    min-width: fit-content;
-    overflow-y: scroll;
-    background-color: var(--muh-background);
-  }
-
-  .feed__header {
+.header{
     position: sticky !important;
     top: 0;
     /* background-color: white; */
@@ -16,10 +7,24 @@
     border: 1px solid var(--ucla-blue);
     padding: 10px 15px;
     font-family: Arial, Helvetica, sans-serif;
-  }
+    width: 77vw;
+}
 
-  .feed__header > h2 {
+.header > h2 {
     text-align: center;
     font-size: 40px;
     font-weight: 800;
-  }
+}
+
+.form{
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.form > form{
+    display: flex;
+    flex-direction: column;
+    /* padding-top: 10px; */
+}

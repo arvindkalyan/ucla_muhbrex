@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
+import "./PostCreate.css"
 import axios from 'axios'
 
 function PostCreate(props) {
@@ -31,27 +32,27 @@ function PostCreate(props) {
     }
     
     return (
-        <div>
-            <h1> PostCreate </h1> 
-            <form onSubmit={handleSubmit}>
-                <label>
+        <div className="postcreate">
+            <div className="header"><h2> Create a New Post! </h2></div> 
+            <div className="form"><form onSubmit={handleSubmit}>
+                <div><label>
                     <input
                         ref={title}
                         name="title"
                         placeholder="Your Titillating Title"
                     /> 
-                </label>
+                </label> </div>
                 
-                <label>
+                <div><label>
                     <input
                         ref={message}
                         name="message"
                         placeholder="Your Moving Message"
                     /> 
-                </label>
+                </label></div>
                 
-            <button type="submit"> Create Post </button> 
-            </form>
+            <button type="submit"> Create Post </button>
+            </form> </div>
                 
         </div>
     )
