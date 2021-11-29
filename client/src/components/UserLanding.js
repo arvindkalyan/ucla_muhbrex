@@ -149,7 +149,7 @@ class UserLanding extends React.Component {
         return (
             <div className='user'>
                 <div className='user__header'><h2>Hello, {this.props.userEmail}</h2></div>
-                <div className="container">
+                <div className="user__container">
                     <div className="UserLanding">
                         {this.renderPosts()}
                     </div>

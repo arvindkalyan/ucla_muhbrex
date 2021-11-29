@@ -9,6 +9,7 @@ import axios from 'axios'
 import Post from './Post';
 import PostList from './PostList';
 import { withRouter, useLocation} from "react-router";
+import './ExpandedPost.css';
 
 
 class ExpandedPost extends React.Component {
@@ -156,8 +157,9 @@ class ExpandedPost extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="ExpandedPost">
+            <div  className="ExpandedPost">
+                <div className="ExpandedPost__header"><h2>You Clicked a Post!</h2></div>
+                <div className="ExpandedPost__post">
                     {this.renderPosts()}
                 </div>
             </div>

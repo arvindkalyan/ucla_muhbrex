@@ -141,7 +141,7 @@ class PostList extends Component{
     
     render() {
         return (
-            <div className={"container"}>
+            <div className={"postList__container"}>
                 <div className={"postList"}>
                 {this.renderPosts()}
                 </div>
