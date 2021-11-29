@@ -4,6 +4,7 @@ import Post from './Post.js'
 import { connect } from "react-redux"
 import { setDislike } from "../actions"
 import axios from 'axios'
+import LIMIT from "./blacklistlimit"
 
 class PostList extends Component{
     constructor(props) {
@@ -38,36 +39,42 @@ class PostList extends Component{
             this.state.posts.map((post) => {
                 if (post.creator === this.props.userId) {
                     dislikesCount += post.usersDisliked.length;
+                    //console.log(post.usersDisliked)
                 }
             })
             this.props.setDislike(dislikesCount);
-        }
-        if (this.props.dislikesT !== prevProps.dislikesT) {
-            this.render()
         }
     }
 
 
     
     renderPosts() {
-        return this.state.posts.map((post) => {
-            return <Post title={post.title}
-                creator={post.creator}
-                message={post.message}
-                likes={post.likes}
-                dislikes={post.dislikes}
-                timeStamp={post.timeStamp}
-                key={post._id}
-                id={post._id}
-                deletePost={this.deletePost}
-                changeLike={this.changeLike}
-                changeDislike={this.changeDislike}
-                usersLiked={post.usersLiked}
-                usersDisliked={post.usersDisliked}
-                onClick={() => window.location = '/post/' + post._id}
-            />
-                
-        })
+        if (this.props.dislikesT < LIMIT) {
+            return this.state.posts.map((post) => {
+                return <Post title={post.title}
+                    creator={post.creator}
+                    message={post.message}
+                    likes={post.likes}
+                    dislikes={post.dislikes}
+                    timeStamp={post.timeStamp}
+                    key={post._id}
+                    id={post._id}
+                    deletePost={this.deletePost}
+                    changeLike={this.changeLike}
+                    changeDislike={this.changeDislike}
+                    usersLiked={post.usersLiked}
+                    usersDisliked={post.usersDisliked}
+                    onClick={() => window.location = '/post/' + post._id}
+                />
+                    
+            })
+        } else {
+            return (
+                <div>
+                    <h2> u r blacklisted lol</h2>
+                </div>
+            )
+        }
     }
 
     deletePost(id, usersDisliked) {
@@ -92,6 +99,7 @@ class PostList extends Component{
     
     changeLike(id, likes, usersLiked) {
         console.log(`Changing likes on post ${id}`)
+        //console.log(this.props.dislikesT)
         const userArray = {
             usersLiked: usersLiked
         }

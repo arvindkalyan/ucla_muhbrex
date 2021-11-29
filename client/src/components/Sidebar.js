@@ -14,6 +14,7 @@ import PostCreate from './PostCreate.js'
 import PostEdit from './PostEdit.js'
 import muhbrex from './../images/muhbrex_logo.png'
 import './Sidebar.css'
+import LIMIT from "./blacklistlimit.js";
 
 function Sidebar(props){
     return (
@@ -29,7 +30,7 @@ function Sidebar(props){
           <GoogleAuth />
           {/* <SidebarOption text="UCLA" link="/" Icon={HomeIcon}/>  */}
           <SidebarOption text="Posts" link="/" Icon={Message}/> 
-          {props.isSignedIn && (props.dislikes < 5) && <SidebarOption text="Create Post" link="/create" Icon={AddIcon}/>}
+          {props.isSignedIn && (props.dislikes < LIMIT) && <SidebarOption text="Create Post" link="/create" Icon={AddIcon}/>}
           {props.isSignedIn && <SidebarOption text="User" link={`/user/${props.userId}`} Icon={PersonOutline}/>}
 
         </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import LIMIT from './blacklistlimit'
 import './Post.css'
 
 
@@ -51,7 +52,7 @@ class Post extends React.Component{
                 
 
                
-                {(this.props.userId === this.props.creator && this.props.dislikesT < 5) ? <button onClick={(e) => {
+                {(this.props.userId === this.props.creator && this.props.dislikesT < LIMIT) ? <button onClick={(e) => {
                     e.stopPropagation();
                     window.location = '/edit/' + this.props.id
                     //console.log(this.props.id)

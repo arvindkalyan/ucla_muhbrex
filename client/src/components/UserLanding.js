@@ -5,6 +5,7 @@ import axios from 'axios';
 import { setDislike } from '../actions';
 import './postList.css'
 import './UserLanding.css'
+import LIMIT from './blacklistlimit';
 
 class UserLanding extends React.Component {
     constructor(props) {
@@ -137,36 +138,30 @@ class UserLanding extends React.Component {
     }
 
     renderPosts() {
-        if (this.props.dislikesT < 5) {
-            return this.state.posts.map((post) => {
-                if (this.props.userId === post.creator) {
-                    return  (
-                        <Post 
-                            title={post.title}
-                            creator={post.creator}
-                            message={post.message}
-                            likes={post.likes}
-                            dislikes={post.dislikes}
-                            timeStamp={post.timeStamp}
-                            key={post._id}
-                            id={post._id}
-                            deletePost={this.deletePost}
-                            changeLike={this.changeLike}
-                            changeDislike={this.changeDislike}
-                            usersLiked={post.usersLiked}
-                            usersDisliked={post.usersDisliked}
-                            onClick={() => window.location = '/post/' + post._id}
-                        />
-                    )
-                } else {
-                    return null;
-                }
-            })
-        } else {
-            return (
-                <div>u r blacklisted lol</div>
-            )
-        }
+        return this.state.posts.map((post) => {
+            if (this.props.userId === post.creator) {
+                return  (
+                    <Post 
+                        title={post.title}
+                        creator={post.creator}
+                        message={post.message}
+                        likes={post.likes}
+                        dislikes={post.dislikes}
+                        timeStamp={post.timeStamp}
+                        key={post._id}
+                        id={post._id}
+                        deletePost={this.deletePost}
+                        changeLike={this.changeLike}
+                        changeDislike={this.changeDislike}
+                        usersLiked={post.usersLiked}
+                        usersDisliked={post.usersDisliked}
+                        onClick={() => window.location = '/post/' + post._id}
+                    />
+                )
+            } else {
+                return null;
+            }
+        })
     }
 
     render() {
