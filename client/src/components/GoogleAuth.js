@@ -1,6 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions'
+import "./SidebarOption.css";
+import "./Sidebar.css"
+import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded'
+import ThumbUpAltRounded from "@material-ui/icons/ThumbUpAltRounded";
+import { Button } from "@material-ui/core";
+
 
 class GoogleAuth extends React.Component {
     //state = { isSignedIn: null }
@@ -43,17 +49,23 @@ class GoogleAuth extends React.Component {
             return null
         } else if (this.props.isSignedIn) {
             return (
-                <button onClick={this.onSignOutClick} className="btn waves-effect waves-light">
-                    <i className="google icon" />
-                    Sign Out
-                </button>
+                <div className="sidebar">
+                <Button onClick={this.onSignOutClick} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>
+                    
+                    <ThumbUpAltRounded />
+                    <h2>Sign Out</h2>
+                </Button>
+                </div>
             )
         } else {
             return (
-                <button onClick={this.onSignInClick} className="btn waves-effect waves-light">
-                    <i className="google icon" />
-                    Sign in with Google
-                </button>
+                <div className="sidebar">
+                    <Button onClick={this.onSignInClick} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>
+                    
+                        <ThumbUpAltRounded />
+                        <h2>Sign in with Google</h2>
+                    </Button>
+                </div>
             )
         }
     }
