@@ -1,10 +1,16 @@
 .post{
-    
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
-    border-bottom: 1px solid orange;
-    border-top: 1px solid orange;
-    border-right: 1px solid orange;
-    border-left: 1px solid orange;
-    padding: 0 70px;
+    border-bottom: 1px solid var(--muh-background);
+    border-top: 1px solid var(--muh-background);
+    border-right: 1px solid var(--muh-background);
+    border-left: 1px solid var(--muh-background);
+    padding: 0 20px 20px;
+    /* padding: 0 70px; */
+    background-color: white;
+    border-radius: 20px;
+    /* flex: 0.7; */
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
 }

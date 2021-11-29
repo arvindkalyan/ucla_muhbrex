@@ -4,6 +4,7 @@ import Post from './Post';
 import axios from 'axios';
 import { setDislike } from '../actions';
 import './postList.css'
+import './UserLanding.css'
 
 class UserLanding extends React.Component {
     constructor(props) {
@@ -170,10 +171,10 @@ class UserLanding extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>{this.props.userEmail}</h1>
+            <div className='user'>
+                <div className='user__header'><h2>Hello, {this.props.userEmail}</h2></div>
                 <h2>Dislikes count: {this.renderDislikes()}</h2>
-                <div className="container">
+                <div className="user__container">
                     <div className="UserLanding">
                         {this.renderPosts()}
                     </div>

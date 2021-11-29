@@ -1,12 +1,10 @@
-.ExpandedPost {
+.user{
     background-color: var(--muh-background);
     overflow-y: scroll;
     min-width: fit-content;
-    min-height: 100vh;
 }
 
-
-.ExpandedPost__header {
+.user__header{
     position: sticky !important;
     top: 0;
     /* background-color: white; */
@@ -17,16 +15,15 @@
     font-family: Arial, Helvetica, sans-serif;
     width: 77vw;
 }
-.ExpandedPost__header > h2 {
+
+.user__header > h2 {
     text-align: center;
     font-size: 40px;
     font-weight: 800;
     color: white;
 }
 
-.ExpandedPost__post {
+.UserLanding {
     padding-top: 5%;
     padding-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
 }

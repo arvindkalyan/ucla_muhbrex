@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 
 import { useParams } from 'react-router-dom';
+import './PostEdit.css'
 import axios from 'axios'
 
 
@@ -45,11 +46,11 @@ const PostEdit = () => {
     }
 
     return (
-        <div>
-            <h1> PostEdit </h1> 
-            <form onSubmit={handleSubmit}>
-                <label>
-                    New Title: 
+        <div className='postEdit'>
+            <div className="postEdit__header"><h2> PostEdit </h2> </div>
+            <div className="postEdit__form"><form onSubmit={handleSubmit}>
+                <div><label>
+                    <p>New Title: </p>
                     <input
                         ref={newTitle}
                         name="title"
@@ -58,11 +59,11 @@ const PostEdit = () => {
                             setTitle(event.target.value)
                         }}
                     /> 
-                </label>
+                </label></div>
                 
-                <label>
-                    New Message: 
-                    <input
+                <div><label>
+                    <p>New Message: </p>
+                    <textarea
                         ref={newMessage}
                         name="message"
                         value={message}
@@ -70,10 +71,10 @@ const PostEdit = () => {
                             setMessage(event.target.value)
                         }}
                     /> 
-                </label>
+                </label></div>
                 
-            <button type="submit"> Submit Changes </button> 
-            </form>
+                <button type="submit"> Submit Changes </button> 
+            </form></div>
         
         </div>
     )

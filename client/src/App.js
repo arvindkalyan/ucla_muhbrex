@@ -20,7 +20,8 @@ class App extends React.Component {
       <div className="app">
 
         <Router>
-          <GoogleAuth />
+          {/* TODO: Make the following set of stuff 
+                before the Routes block into an actual nice navbar */}
           {/*<PostCreateButton />*/}
           <Sidebar />
           

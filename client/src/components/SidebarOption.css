@@ -17,9 +17,9 @@ a:visited{
 
 
 .sidebarOption:hover{
-    background-color: #e8f5fe !important;
+    background-color: var(--muh-background) !important;
     border-radius: 30px !important;
-    color: #50b7f5 !important;
+    color: var(--ucla-blue) !important;
     transition: color 10ms ease-in-out !important;
 }
 
@@ -35,5 +35,5 @@ a:visited{
 }
 
 .sidebarOption--active {
-    color: #50b7f5;
+    color: var(--ucla-blue);
 }

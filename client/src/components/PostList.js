@@ -163,7 +163,7 @@ class PostList extends Component{
     
     render() {
         return (
-            <div className={"container"}>
+            <div className={"postList__container"}>
                 <div>{this.props.dislikesT}</div>
                 <div className={"postList"}>
                 {this.renderPosts()}
