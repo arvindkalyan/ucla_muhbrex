@@ -24,6 +24,12 @@
 }
 
 .UserLanding {
-    padding-top: 5%;
+    padding-top: 5px;
     padding-bottom: 20px;
+}
+
+.user__container h2 {
+    color: var(--ucla-blue);
+    text-align: center;
+    font-size: 30px;
 }

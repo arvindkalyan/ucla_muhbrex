@@ -154,7 +154,7 @@ class ExpandedPost extends React.Component {
             <div  className="ExpandedPost">
                 <div className="ExpandedPost__header"><h2>You Clicked a Post!</h2></div>
                 <div className="ExpandedPost__post">
-                    {this.renderPosts()}
+                    {this.renderPost()}
                 </div>
             </div>
         )
