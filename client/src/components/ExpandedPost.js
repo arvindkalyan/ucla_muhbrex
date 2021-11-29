@@ -152,7 +152,7 @@ class ExpandedPost extends React.Component {
     render() {
         return (
             <div  className="ExpandedPost">
-                <div className="ExpandedPost__header"><h2>You Clicked a Post!</h2></div>
+                <div className="ExpandedPost__header"><h2>{this.state.post ? this.state.post.title : null}</h2></div>
                 <div className="ExpandedPost__post">
                     {this.renderPost()}
                 </div>

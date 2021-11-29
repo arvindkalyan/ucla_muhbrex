@@ -42,12 +42,12 @@ const PostEdit = () => {
             .then((res) => console.log(res.data))
             .catch((error) => console.log(error.message))
         //take person back to homepage 
-        window.location = '/post/'+ id
+        window.location = '/'
     }
 
     return (
         <div className='postEdit'>
-            <div className="postEdit__header"><h2> PostEdit </h2> </div>
+            <div className="postEdit__header"><h2> Edit Your Post! </h2> </div>
             <div className="postEdit__form"><form onSubmit={handleSubmit}>
                 <div><label>
                     <p>New Title: </p>
