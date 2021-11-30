@@ -58,6 +58,7 @@ class PostList extends Component{
                     likes={post.likes}
                     dislikes={post.dislikes}
                     comments={post.comments}
+                    parent={post.parent}
                     timeStamp={post.timeStamp}
                     key={post._id}
                     id={post._id}

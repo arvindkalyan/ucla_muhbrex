@@ -169,7 +169,6 @@ class UserLanding extends React.Component {
     renderPosts() {
         
         return this.state.posts.map((post) => {
-            console.log(post)
             if (this.props.userId === post.creator) {
                 return  (
                     <Post 
