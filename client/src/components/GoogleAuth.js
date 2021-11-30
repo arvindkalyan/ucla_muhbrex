@@ -62,6 +62,7 @@ class GoogleAuth extends React.Component {
                 <div className="sidebar">
                     <Button onClick={this.onSignInClick} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>
                     
+                        
                         <ThumbDownAltOutlined />
                         <h2>Sign in with Google</h2>
                     </Button>
