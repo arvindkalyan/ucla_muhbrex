@@ -4,8 +4,8 @@ import { signIn, signOut } from '../actions'
 import "./SidebarOption.css";
 import "./Sidebar.css"
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded'
-import ThumbUpAltRounded from "@material-ui/icons/ThumbUpAltRounded";
 import { Button } from "@material-ui/core";
+import ThumbDownAltOutlined from "@material-ui/icons/ThumbDownAltOutlined";
 
 
 class GoogleAuth extends React.Component {
@@ -52,7 +52,7 @@ class GoogleAuth extends React.Component {
                 <div className="sidebar">
                 <Button onClick={this.onSignOutClick} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>
                     
-                    <ThumbUpAltRounded />
+                    <ThumbDownAltOutlined />
                     <h2>Sign Out</h2>
                 </Button>
                 </div>
@@ -62,7 +62,7 @@ class GoogleAuth extends React.Component {
                 <div className="sidebar">
                     <Button onClick={this.onSignInClick} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>
                     
-                        <ThumbUpAltRounded />
+                        <ThumbDownAltOutlined />
                         <h2>Sign in with Google</h2>
                     </Button>
                 </div>
