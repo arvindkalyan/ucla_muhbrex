@@ -49,32 +49,24 @@ class PostList extends Component{
 
     
     renderPosts() {
-        if (this.props.dislikesT < LIMIT) {
-            return this.state.posts.map((post) => {
-                return <Post title={post.title}
-                    creator={post.creator}
-                    message={post.message}
-                    likes={post.likes}
-                    dislikes={post.dislikes}
-                    timeStamp={post.timeStamp}
-                    key={post._id}
-                    id={post._id}
-                    deletePost={this.deletePost}
-                    changeLike={this.changeLike}
-                    changeDislike={this.changeDislike}
-                    usersLiked={post.usersLiked}
-                    usersDisliked={post.usersDisliked}
-                    onClick={() => window.location = '/post/' + post._id}
-                />
-                    
-            })
-        } else {
-            return (
-                <div>
-                    <h2> u r blacklisted lol</h2>
-                </div>
-            )
-        }
+        return this.state.posts.map((post) => {
+            return <Post title={post.title}
+                creator={post.creator}
+                message={post.message}
+                likes={post.likes}
+                dislikes={post.dislikes}
+                timeStamp={post.timeStamp}
+                key={post._id}
+                id={post._id}
+                deletePost={this.deletePost}
+                changeLike={this.changeLike}
+                changeDislike={this.changeDislike}
+                usersLiked={post.usersLiked}
+                usersDisliked={post.usersDisliked}
+                onClick={() => window.location = '/post/' + post._id}
+            />
+                
+        })
     }
 
     deletePost(id, usersDisliked) {

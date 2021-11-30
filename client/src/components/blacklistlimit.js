@@ -1,3 +1,3 @@
-const LIMIT = 5
+const LIMIT = 10
 
 export default LIMIT
