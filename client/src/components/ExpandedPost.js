@@ -6,7 +6,8 @@ import { setDislike } from '../actions'
 import PostList from './PostList';
 import { withRouter, useLocation} from "react-router";
 import './ExpandedPost.css';
-
+import CommentCreate from './CommentCreate';
+import CommentList from './CommentList';
 
 class ExpandedPost extends React.Component {
     constructor(props) {
@@ -20,13 +21,14 @@ class ExpandedPost extends React.Component {
         this.changeLike = this.changeLike.bind(this)
         this.changeDislike = this.changeDislike.bind(this)
         this.renderPost = this.renderPost.bind(this)
+        this.changeComment = this.changeComment.bind(this)
+        
     }
 
     componentDidMount() {
         console.log(this.props.dislikesT)
         let id = window.location.pathname.slice(6)
-        console.log(id)
-        console.log('http://localhost:5000/posts/get/' + id)
+        
         console.log("setting posts")
         axios.get('http://localhost:5000/posts/get/' + id)
             .then((res) => {
@@ -95,9 +97,6 @@ class ExpandedPost extends React.Component {
             .catch((error) => {
                 console.log(error.message)
             })
-        
-
-     
     }
     
     changeDislike(id, dislikes, usersDisliked, creator, added) {
@@ -120,31 +119,56 @@ class ExpandedPost extends React.Component {
             .catch((error) => {
                 console.log(error.message)
             })
-        
-
-     
     }
 
+    changeComment(id, comments) {
+        console.log(`Changing comments on post ${id}`)
+        //let self = this
+        axios.post('http://localhost:5000/posts/changeComments/' + id + '/' + comments)
+            .then(() => {
+                console.log(`comment successful`)
+                this.setState({
+                    post: {...this.state.post, comments: comments}
+                })
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+    }
+    
 
+   
     renderPost() {
         const post = this.state.post
         if (post !== null) {
-             return <Post title = {post.title}
+            console.log("FROM EXPANDED: ")
+            console.log(post.comments)
+             return <div>
+                 
+                 <Post title = {post.title}
                         creator={post.creator}
                         message={post.message}
                         likes={post.likes}
                         dislikes={post.dislikes}
+                        comments={post.comments}
+                        parent={post.parent}
                         timeStamp={post.timeStamp}
                         key={post._id}
                         id={post._id}
                         deletePost={this.deletePost}
                         changeLike={this.changeLike}
                         changeDislike={this.changeDislike}
+                        changeComment = {this.changeComment}
                         usersLiked={post.usersLiked}
                         usersDisliked={post.usersDisliked}
                         onClick={() => {}}
+                        expanded={true}
                     />
+                
+                
+                </div>
         }
+        
         return <div>  </div>
        
     }

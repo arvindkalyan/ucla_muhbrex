@@ -1,12 +1,13 @@
-import React, { Component } from "react"
-import "./postList.css"
-import Post from './Post.js'
-import { connect } from "react-redux"
-import { setDislike } from "../actions"
-import axios from 'axios'
-import LIMIT from "./blacklistlimit"
+import React from 'react';
+import { connect } from 'react-redux'
+import Post from './Post';
+import axios from 'axios';
+import { setDislike } from '../actions';
+import './postList.css'
+import './UserLanding.css'
+import LIMIT from './blacklistlimit';
 
-class PostList extends Component{
+class CommentList extends React.Component {
     constructor(props) {
         super(props)
 
@@ -19,7 +20,7 @@ class PostList extends Component{
         this.changeDislike = this.changeDislike.bind(this)
         console.log(this.state.posts)
     }
-    
+
     componentDidMount() {
         console.log("setting posts")
         axios.get('http://localhost:5000/posts')
@@ -39,50 +40,14 @@ class PostList extends Component{
             this.state.posts.map((post) => {
                 if (post.creator === this.props.userId) {
                     dislikesCount += post.usersDisliked.length;
-                    //console.log(post.usersDisliked)
                 }
             })
             this.props.setDislike(dislikesCount);
         }
     }
 
-
-    
-    renderPosts() {
-        if (this.props.dislikesT < LIMIT) {
-            return this.state.posts.map((post) => {
-                if(post.parent == null){
-                return <Post title={post.title}
-                    creator={post.creator}
-                    message={post.message}
-                    likes={post.likes}
-                    dislikes={post.dislikes}
-                    comments={post.comments}
-                    timeStamp={post.timeStamp}
-                    key={post._id}
-                    id={post._id}
-                    deletePost={this.deletePost}
-                    changeLike={this.changeLike}
-                    changeDislike={this.changeDislike}
-                    changeComment = {this.changeComment}
-                    usersLiked={post.usersLiked}
-                    usersDisliked={post.usersDisliked}
-                    onClick={() => window.location = '/post/' + post._id}
-                />
-                }
-            })
-        } else {
-            return (
-                <div>
-                    <h2> u r blacklisted lol</h2>
-                </div>
-            )
-        }
-    }
-
     deletePost(id, usersDisliked) {
         console.log("deleting")
-        console.log(usersDisliked)
         this.props.setDislike(this.props.dislikesT - usersDisliked.length)
         
         //for some reason this shit did not work 
@@ -102,7 +67,7 @@ class PostList extends Component{
     
     changeLike(id, likes, usersLiked) {
         console.log(`Changing likes on post ${id}`)
-        //console.log(this.props.dislikesT)
+        //let self = this
         const userArray = {
             usersLiked: usersLiked
         }
@@ -133,7 +98,7 @@ class PostList extends Component{
 
      
     }
-
+    
     changeDislike(id, dislikes, usersDisliked, creator, added) {
         //console.log(`Changing dislikes on post ${id}`)
         if (creator === this.props.userId) {
@@ -147,7 +112,7 @@ class PostList extends Component{
             .then(() => {
                 console.log(`dislike successful`)
                 this.setState((prev) => {
-                    //console.log(prev)
+                    console.log(prev)
                     return {
                         posts: prev.posts.map((post) => {
                             if (id === post._id) {
@@ -165,10 +130,7 @@ class PostList extends Component{
             })
             .catch((error) => {
                 console.log(error.message)
-            })
-        
-
-     
+            })  
     }
 
     changeComment(id, comments) {
@@ -200,15 +162,48 @@ class PostList extends Component{
             })
     }
 
-    
+    renderDislikes() {
+        return <div>{this.props.dislikesT}</div>
+    }
+
+    renderPosts() {
+        return this.state.posts.map((post) => {
+            if (this.props.parent === post.parent) {
+                return  (
+                    <Post 
+                        title={post.title}
+                        creator={post.creator}
+                        message={post.message}
+                        likes={post.likes}
+                        dislikes={post.dislikes}
+                        comments={post.comments}
+                        parent={post.parent}
+                        timeStamp={post.timeStamp}
+                        key={post._id}
+                        id={post._id}
+                        deletePost={this.deletePost}
+                        changeLike={this.changeLike}
+                        changeDislike={this.changeDislike}
+                        changeComment = {this.changeComment}
+                        usersLiked={post.usersLiked}
+                        usersDisliked={post.usersDisliked}
+                        onClick={() => window.location = '/post/' + post._id}
+                    />
+                )
+            } else {
+                return null;
+            }
+        })
+    }
+
     render() {
         return (
-            <div className={"postList__container"}>
-                {/* <div>{this.props.dislikesT}</div> */}
-                <div className={"postList"}>
-                {this.renderPosts()}
-                </div>
+            <div>
+                <h2 className="feed__header">COMMENTS</h2>
+            <div>{this.renderPosts()}</div>
             </div>
+            
+
         )
     }
 }
@@ -217,8 +212,9 @@ const mapStateToProps = (state) => {
     return {
         isSignedIn: state.auth.isSignedIn,
         userId: state.auth.userId,
+        userEmail: state.auth.userEmail,
         dislikesT: state.likes.dislikes
     }
 }
 
-export default connect(mapStateToProps, { setDislike })(PostList)
+export default connect(mapStateToProps, { setDislike })(CommentList);

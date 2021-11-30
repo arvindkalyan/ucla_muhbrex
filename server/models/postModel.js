@@ -1,6 +1,15 @@
 import mongoose from 'mongoose'
 
 const postSchema = mongoose.Schema({
+    parent: {
+        type: String,
+        default: null
+    },
+    children: [String],
+    comments: {
+        type: Number, 
+        default: 0
+    },
     title: String,
     message: String,
     creator: String,

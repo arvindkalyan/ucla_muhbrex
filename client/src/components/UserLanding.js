@@ -137,8 +137,39 @@ class UserLanding extends React.Component {
         return <div>{this.props.dislikesT}</div>
     }
 
+    changeComment(id, comments) {
+        console.log(`Changing comments on post ${id}`)
+        //let self = this
+        
+        axios.post('http://localhost:5000/posts/changeComments/' + id + '/' + comments)
+            .then(() => {
+                console.log(`like successful`)
+                this.setState((prev) => {
+                    console.log(prev)
+                    return {
+                        posts: prev.posts.map((post) => {
+                            if (id === post._id) {
+                                return {
+                                    ...post,
+                                    comments: comments
+                                }
+                            }
+                            else {
+                                return post
+                            }
+                        })
+                   }
+               })
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+    }
+
     renderPosts() {
+        
         return this.state.posts.map((post) => {
+            console.log(post)
             if (this.props.userId === post.creator) {
                 return  (
                     <Post 
@@ -147,12 +178,15 @@ class UserLanding extends React.Component {
                         message={post.message}
                         likes={post.likes}
                         dislikes={post.dislikes}
+                        comments={post.comments}
+                        parent={post.parent}
                         timeStamp={post.timeStamp}
                         key={post._id}
                         id={post._id}
                         deletePost={this.deletePost}
                         changeLike={this.changeLike}
                         changeDislike={this.changeDislike}
+                        changeComment = {this.changeComment}
                         usersLiked={post.usersLiked}
                         usersDisliked={post.usersDisliked}
                         onClick={() => window.location = '/post/' + post._id}

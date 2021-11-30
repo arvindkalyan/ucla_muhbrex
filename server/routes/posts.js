@@ -7,6 +7,7 @@ import {
     changeDislikes, 
     updatePost,
     deletePost,
+    changeComments
 } from '../controllers/posts.js'
 const router = express.Router()
 
@@ -19,6 +20,7 @@ router.get('/', getPosts)
 router.post('/create', createPost)
 router.post('/changeLikes/:id/:likes', changeLikes)
 router.post('/changeDislikes/:id/:dislikes', changeDislikes)
+router.post('/changeComments/:id/:comments', changeComments)
 // router.post('/adddislikes/:id/:dislikes', incrementDislikes)
 // router.post('/decrementDislikes/:id/:dislikes', decrementDislikes)
 

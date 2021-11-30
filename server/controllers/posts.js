@@ -17,6 +17,7 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
     try {
         const postID = req.params.id
+        
         const post = await PostModel.findById(postID)
         res.status(200).json(post)
         console.log("post " + postID + " retrieved!")
@@ -29,6 +30,7 @@ export const getPost = async (req, res) => {
 export const createPost = async (req, res) => {
     
     //const timeStamp = Date.parse(req.body.timeStamp)
+    const parent = req.body.parent
     const title = req.body.title
     const message = req.body.message
     const creator = req.body.creator
@@ -36,6 +38,7 @@ export const createPost = async (req, res) => {
     const timeStamp = [rawTime[0], rawTime[1], rawTime[2], rawTime[3], rawTime[4] ].join(' ')
     
     const newPost = new PostModel({
+        parent,
         title,
         message,
         creator,
@@ -46,6 +49,7 @@ export const createPost = async (req, res) => {
         console.log("post added")
         res.status(201).json(newPost)
     } catch (error) {
+        console.log(error.message)
         res.status(409).json({message : error.message})
     }
 }
@@ -80,6 +84,24 @@ export const changeDislikes = async (req, res) => {
         const newDislikes = Number(req.params.dislikes)
         const userArray = req.body.usersDisliked
         const post = await PostModel.findByIdAndUpdate(postID, {dislikes : newDislikes, usersDisliked: userArray})
+        res.status(201).json(post)
+        
+    }
+    catch (error) {
+        res.status(404).json({message : error.message})
+    }
+}
+
+export const changeComments = async (req, res) => {
+    try {
+
+        //we can't directly modify a field based 
+        //on its previous value, so we need this intermediary 
+        //step to find the previous value of the likes field 
+        const postID = req.params.id
+        const newComments = Number(req.params.comments)
+        const commentsArray = req.body.children
+        const post = await PostModel.findByIdAndUpdate(postID, {comments : newComments, children: commentsArray})
         res.status(201).json(post)
         
     }
