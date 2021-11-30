@@ -6,6 +6,9 @@ import "./Sidebar.css"
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded'
 import { Button } from "@material-ui/core";
 import ThumbDownAltOutlined from "@material-ui/icons/ThumbDownAltOutlined";
+import GoogleIcon from '@mui/icons-material/Google';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 
 class GoogleAuth extends React.Component {
@@ -49,27 +52,38 @@ class GoogleAuth extends React.Component {
             return null
         } else if (this.props.isSignedIn) {
             return (
-                <div className="sidebar">
+                <div>
                 <Button onClick={this.onSignOutClick} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>
-                    
-                    <ThumbDownAltOutlined />
+                    <LogoutIcon className="sidebarOption"/>
                     <h2>Sign Out</h2>
                 </Button>
                 </div>
             )
         } else {
             return (
-                <div className="sidebar">
+                <div>
                     <Button onClick={this.onSignInClick} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>
-                    
-                        
-                        <ThumbDownAltOutlined />
+                        <GoogleIcon className="sidebarOption"/>
                         <h2>Sign in with Google</h2>
                     </Button>
                 </div>
             )
         }
     }
+
+/*
+
+    function SidebarOption({ active, text, link, Icon }) {
+  return (
+    <div>
+      <Button component={Link} to={link} className="sidebarOption" fullWidth style={{ borderRadius: 30, justifyContent: 'left'}}>  
+        <Icon className="sidebarOption"/>
+        <h2> {text} </h2>
+      </Button>
+    </div>
+  );
+}
+*/
 
     render() {
         return (

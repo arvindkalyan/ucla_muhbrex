@@ -43,8 +43,8 @@ class Post extends React.Component{
                 <p> Creator: {this.props.creator} </p>
                 <p> Title: {this.props.title} </p>
                 <p> Message: {this.props.message} </p>
-                <p> Likes: {this.props.likes} </p>
-                <p> Dislikes: {this.props.dislikes} </p> 
+                {/*<p> Likes: {this.props.likes} </p> */}
+                {/*<p> Dislikes: {this.props.dislikes} </p> */}
                 {/* <p> ID: {this.props.id} </p> */}
                 <p> Timestamp: {this.props.timeStamp} </p> 
                 
@@ -53,11 +53,13 @@ class Post extends React.Component{
                <div onClick={(e) => {e.stopPropagation()}}>
                 {(this.props.isSignedIn && !this.props.usersLiked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation();this.props.changeLike(this.props.id, this.props.likes + 1, this.processAddUser(this.props.usersLiked))}}> <ThumbUpAltOutlinedIcon /> </IconButton> : null}
                 {(this.props.isSignedIn && this.props.usersLiked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation();this.props.changeLike(this.props.id, this.props.likes - 1, this.processRemoveUser(this.props.usersLiked)) }}> <ThumbUpAltRounded /> </IconButton> : null}
+                {this.props.isSignedIn && this.props.likes}
                 
               
                 {/* the following two lines are for dislike/remove dislike button */}
                 {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation();this.props.changeDislike(this.props.id, this.props.dislikes + 1, this.processAddUser(this.props.usersDisliked))}}> <ThumbDownAltOutlinedIcon /> </IconButton> : null}
                 {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => {e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes - 1, this.processRemoveUser(this.props.usersDisliked)) }}> <ThumbDownAltRounded /> </IconButton> : null}
+                {this.props.isSignedIn && this.props.dislikes}
                 
                
                 {(this.props.userId === this.props.creator && this.props.dislikesT < LIMIT) ? <IconButton onClick={(e) => {
