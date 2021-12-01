@@ -12,7 +12,7 @@
     z-index: 100;
     border: 1px solid var(--ucla-blue);
     padding: 10px 15px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
     width: 77vw;
 }
 
@@ -32,4 +32,5 @@
     color: var(--ucla-blue);
     text-align: center;
     font-size: 30px;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif; 
 }
