@@ -51,23 +51,26 @@ class Post extends React.Component{
 
                 {/* the following two lines are for like/unlike button */}
                <div onClick={(e) => {e.stopPropagation()}}>
-                {(this.props.isSignedIn && !this.props.usersLiked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation();this.props.changeLike(this.props.id, this.props.likes + 1, this.processAddUser(this.props.usersLiked))}}> <ThumbUpAltOutlinedIcon /> </IconButton> : null}
-                {(this.props.isSignedIn && this.props.usersLiked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation();this.props.changeLike(this.props.id, this.props.likes - 1, this.processRemoveUser(this.props.usersLiked)) }}> <ThumbUpAltRounded /> </IconButton> : null}
-                {this.props.isSignedIn && this.props.likes}
+                    {(this.props.isSignedIn && !this.props.usersLiked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation(); this.props.changeLike(this.props.id, this.props.likes + 1, this.processAddUser(this.props.usersLiked)) }}> <ThumbUpAltOutlinedIcon /> </IconButton> : null}
+                    {(!this.props.isSignedIn ? <IconButton> <ThumbUpAltOutlinedIcon /> </IconButton>  : null)}
+                    {(this.props.isSignedIn && this.props.usersLiked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation();this.props.changeLike(this.props.id, this.props.likes - 1, this.processRemoveUser(this.props.usersLiked)) }}> <ThumbUpAltRounded /> </IconButton> : null}
+                    {/* {this.props.isSignedIn && this.props.likes} */}
+                    { this.props.likes}
+                    
                 
-              
-                {/* the following two lines are for dislike/remove dislike button */}
-                {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation();this.props.changeDislike(this.props.id, this.props.dislikes + 1, this.processAddUser(this.props.usersDisliked))}}> <ThumbDownAltOutlinedIcon /> </IconButton> : null}
-                {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => {e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes - 1, this.processRemoveUser(this.props.usersDisliked)) }}> <ThumbDownAltRounded /> </IconButton> : null}
-                {this.props.isSignedIn && this.props.dislikes}
+                    {/* the following two lines are for dislike/remove dislike button */}
+                    {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes + 1, this.processAddUser(this.props.usersDisliked)) }}> <ThumbDownAltOutlinedIcon /> </IconButton> : null}
+                    {(!this.props.isSignedIn ? <IconButton> <ThumbDownAltOutlinedIcon /> </IconButton>  : null)}
+                    {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => {e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes - 1, this.processRemoveUser(this.props.usersDisliked)) }}> <ThumbDownAltRounded /> </IconButton> : null}
+                    {this.props.dislikes}
+                    
                 
-               
-                {(this.props.userId === this.props.creator && this.props.dislikesT < LIMIT) ? <IconButton onClick={(e) => {
-                    e.stopPropagation();
-                    window.location = '/edit/' + this.props.id
-                    //console.log(this.props.id)
-                }}> <EditOutlined/> </IconButton> : null}
-                {(this.props.userId === this.props.creator) ? <IconButton color="secondary" onClick={(e) => { e.stopPropagation(); this.props.deletePost(this.props.id, this.props.usersDisliked) }}> <DeleteOutlineRoundedIcon/> </IconButton> : null}
+                    {(this.props.userId === this.props.creator && this.props.dislikesT < LIMIT) ? <IconButton onClick={(e) => {
+                        e.stopPropagation();
+                        window.location = '/edit/' + this.props.id
+                        //console.log(this.props.id)
+                    }}> <EditOutlined/> </IconButton> : null}
+                    {(this.props.userId === this.props.creator) ? <IconButton color="secondary" onClick={(e) => { e.stopPropagation(); this.props.deletePost(this.props.id, this.props.usersDisliked) }}> <DeleteOutlineRoundedIcon/> </IconButton> : null}
                 </div>
             </div>
         )
