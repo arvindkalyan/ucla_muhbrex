@@ -58,9 +58,9 @@ class Post extends React.Component{
                     
                 
                     {/* the following two lines are for dislike/remove dislike button */}
-                    {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes + 1, this.processAddUser(this.props.usersDisliked)) }}> <ThumbDownAltOutlinedIcon /> </IconButton> : null}
+                    {(this.props.isSignedIn && !this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => { e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes + 1, this.processAddUser(this.props.usersDisliked), this.props.creator, true) }}> <ThumbDownAltOutlinedIcon /> </IconButton> : null}
                     {(!this.props.isSignedIn ? <IconButton> <ThumbDownAltOutlinedIcon /> </IconButton>  : null)}
-                    {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => {e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes - 1, this.processRemoveUser(this.props.usersDisliked)) }}> <ThumbDownAltRounded /> </IconButton> : null}
+                    {(this.props.isSignedIn && this.props.usersDisliked.includes(this.props.userId)) ? <IconButton onClick={(e) => {e.stopPropagation(); this.props.changeDislike(this.props.id, this.props.dislikes - 1, this.processRemoveUser(this.props.usersDisliked), this.props.creator, false) }}> <ThumbDownAltRounded /> </IconButton> : null}
                     {this.props.dislikes}
                     
                 

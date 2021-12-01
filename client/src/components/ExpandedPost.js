@@ -60,9 +60,9 @@ class ExpandedPost extends React.Component {
         }
     }
 
-    deletePost(id) {
+    deletePost(id, usersDisliked) {
         console.log("deleting")
-        
+        this.props.setDislike(this.props.dislikesT - usersDisliked.length)
         //for some reason this shit did not work 
         //const url = 'http://localhost:5000/posts/delete/' + id
         //console.log(url)
