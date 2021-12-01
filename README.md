@@ -1,3 +1,10 @@
+Group members: 
+- Sophia Adrangi 405484745
+- Zachariah Mustafa 705347196
+- Richard Jiang 105571046
+- Katelyn Yu 805485347
+- Arvind Kalyan 405512343
+
 After you clone the repository, to get the development servers running, do the following:
 
 1.  cd into ucla_muhbrex (if not already in there) 
