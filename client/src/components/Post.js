@@ -70,7 +70,7 @@ class Post extends React.Component{
                         //console.log(this.props.id)
                     }}> <EditOutlined/> </IconButton> : null}
                     {(this.props.userId === this.props.creator) ? <IconButton color="secondary" onClick={(e) => { e.stopPropagation(); this.props.deletePost(this.props.id, this.props.usersDisliked) }}> <DeleteOutlineRoundedIcon/> </IconButton> : null}
-                    <p style={{float:'right'}}> {/*<span style={{fontWeight:'500'}}> Timestamp: </span> */} {this.props.timeStamp} </p> 
+                    <p style={{float:'right'}}> {/*<span style={{fontWeight:'500'}}> Timestamp: </span>  */} {this.props.timeStamp} </p> 
                 </div>
             </div>
         )
