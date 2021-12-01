@@ -40,13 +40,13 @@ class Post extends React.Component{
         return (
             <div className="post" onClick={() => this.props.onClick()}>
                 {/* please remove the creator line  */}
-                <p> Creator: {this.props.creator} </p>
-                <p> Title: {this.props.title} </p>
-                <p> Message: {this.props.message} </p>
+                {/* <p> Creator: {this.props.creator} </p> */}
+                <p> <span style={{fontWeight:'500'}}> Title: </span> {this.props.title} </p>
+                <p> <span style={{fontWeight:'500'}}> Message: </span> {this.props.message} </p>
                 {/*<p> Likes: {this.props.likes} </p> */}
                 {/*<p> Dislikes: {this.props.dislikes} </p> */}
                 {/* <p> ID: {this.props.id} </p> */}
-                <p> Timestamp: {this.props.timeStamp} </p> 
+                <p> <span style={{fontWeight:'500'}}> Timestamp: </span> {this.props.timeStamp} </p> 
                 
 
                 {/* the following two lines are for like/unlike button */}
