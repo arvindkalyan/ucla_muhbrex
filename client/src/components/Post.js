@@ -41,12 +41,11 @@ class Post extends React.Component{
             <div className="post" onClick={() => this.props.onClick()}>
                 {/* please remove the creator line  */}
                 {/* <p> Creator: {this.props.creator} </p> */}
-                <p> <span style={{fontWeight:'500'}}> Title: </span> {this.props.title} </p>
-                <p> <span style={{fontWeight:'500'}}> Message: </span> {this.props.message} </p>
+                <h2> {/*<span style={{fontWeight:'500'}}> Title: </span>*/} {this.props.title} </h2>
+                <p> {/*<span style={{fontWeight:'500'}}> Message: </span>*/} {this.props.message} </p>
                 {/*<p> Likes: {this.props.likes} </p> */}
                 {/*<p> Dislikes: {this.props.dislikes} </p> */}
                 {/* <p> ID: {this.props.id} </p> */}
-                <p> <span style={{fontWeight:'500'}}> Timestamp: </span> {this.props.timeStamp} </p> 
                 
 
                 {/* the following two lines are for like/unlike button */}
@@ -71,6 +70,7 @@ class Post extends React.Component{
                         //console.log(this.props.id)
                     }}> <EditOutlined/> </IconButton> : null}
                     {(this.props.userId === this.props.creator) ? <IconButton color="secondary" onClick={(e) => { e.stopPropagation(); this.props.deletePost(this.props.id, this.props.usersDisliked) }}> <DeleteOutlineRoundedIcon/> </IconButton> : null}
+                    <p style={{float:'right'}}> {/*<span style={{fontWeight:'500'}}> Timestamp: </span> */} {this.props.timeStamp} </p> 
                 </div>
             </div>
         )

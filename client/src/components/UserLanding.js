@@ -169,7 +169,7 @@ class UserLanding extends React.Component {
             <div className='user'>
                 <div className='user__header'><h2>Hello, {this.props.userEmail}</h2></div>
                 <div className="user__container">
-                    <h2>Your dislikes count: {this.renderDislikes()}</h2>
+                    <h3>Your dislikes count: {this.renderDislikes()}</h3>
                     <div className="UserLanding">
                         {this.renderPosts()}
                     </div>

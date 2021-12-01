@@ -7,12 +7,12 @@
 .postList {
   display: flex;
   flex-direction: column;
-  gap: 10%;
+  gap: 3vh;
   width: 80vw;
 }
 
 .UserLanding {
   display: flex;
   flex-direction: column;
-  gap: 10%;
+  gap: 3vh;
 }
