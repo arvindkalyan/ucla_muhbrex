@@ -44,7 +44,7 @@ const PORT = process.env.port || 5000
 
 
 //PLEASE USE TEST_URL WHEN YOU'RE TESTING INSTEAD OF CONNECTION_URL
-mongoose.connect(TEST_URL, {
+mongoose.connect(CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     
